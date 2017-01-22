@@ -4,6 +4,8 @@
     using System.IO;
     using System.Collections.Generic;
     using System.Globalization;
+    using OfficeOpenXml;
+
     public class ExcelService : IExcelService
     {
         private ExcelContext excelContext;
@@ -85,6 +87,31 @@
             }
             this.excelContext.DataSheets = excelSheetData;
             return this.excelContext.WriteFile();
-        }        
+        }
+
+        public Dictionary<string, object> ReadExcel(string filePath)
+        {
+            var fields = new Dictionary<string, object>();
+            var package = new ExcelPackage(new FileInfo(filePath));
+            if (package.Workbook.Worksheets.Count > 0)
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                for (int i = workSheet.Dimension.Start.Column;
+                    i <= workSheet.Dimension.End.Column;
+                    i++)
+                {
+                    for (int j = workSheet.Dimension.Start.Row;
+                            j <= workSheet.Dimension.End.Row;
+                            j++)
+                    {
+                        //fields.Add(workSheet.Cells[i, j].co)
+                        var cell = workSheet.Cells[i, j];
+                        fields.Add(cell.Address, cell.Value);
+                    }
+                }
+            
+            }
+            return fields;
+        }
     }
 }

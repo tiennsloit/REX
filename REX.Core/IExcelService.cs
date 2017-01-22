@@ -17,5 +17,7 @@ namespace REX.Core
         FileStream SaveAs(FileStream ouput, List<ExcelDataSheet> excelSheetData, string templatePath, CultureInfo culture = null);
 
         MemoryStream SaveAs(MemoryStream ouput, List<ExcelDataSheet> excelSheetData, string templatePath, CultureInfo culture = null);
+
+        Dictionary<string, object> ReadExcel(string filePath);
     }
 }
