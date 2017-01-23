@@ -25,10 +25,10 @@ namespace REX.Web.Controllers
         {
             var services = new DriveService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyAR-K-trsPvAJfkcjBTubxW-wKd0Rv4TYo",  // from https://console.developers.google.com (Public API access)
+                ApiKey = StringHelper.GetAppSettingValueOrDefault("DriveAPIKey", ""),  // from https://console.developers.google.com (Public API access)
                 ApplicationName = "Drive API Sample",
             });
-            File file = services.Files.Get("1WWTx3lR_0MybYWQBp1ZQYPcNM0KYitrbTEafBXhHGiw").Execute();
+            File file = services.Files.Get(StringHelper.GetAppSettingValueOrDefault("DriveFileId","")).Execute();
             var filePath = "~/Drive//" + "excel" + DateTime.Now.Ticks.ToString() + ".xlsx";
             foreach (var link in file.ExportLinks)
             {
@@ -55,9 +55,9 @@ namespace REX.Web.Controllers
             }
 
             var excels = new ExcelService();
-            excels.ReadExcel(HostingEnvironment.MapPath(filePath));
-
-            return "value";
+            var dics = excels.ReadExcel(HostingEnvironment.MapPath(filePath));
+            var value = dics.Where(x => x.Key == "A1").FirstOrDefault();
+            return value.Value.ToString();
         }
 
         // POST api/<controller>

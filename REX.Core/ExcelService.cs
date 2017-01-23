@@ -95,7 +95,7 @@
             var package = new ExcelPackage(new FileInfo(filePath));
             if (package.Workbook.Worksheets.Count > 0)
             {
-                ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                ExcelWorksheet workSheet = package.Workbook.Worksheets[StringHelper.GetAppSettingValueOrDefault("SheetName", "")];
                 for (int i = workSheet.Dimension.Start.Column;
                     i <= workSheet.Dimension.End.Column;
                     i++)
