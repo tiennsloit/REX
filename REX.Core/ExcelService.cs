@@ -5,7 +5,8 @@
     using System.Collections.Generic;
     using System.Globalization;
     using OfficeOpenXml;
-
+    using REX.Core.Model;
+    using System.Reflection;
     public class ExcelService : IExcelService
     {
         private ExcelContext excelContext;
@@ -89,29 +90,54 @@
             return this.excelContext.WriteFile();
         }
 
+        public Dictionary<string, string> GetFieldMappers()
+        {
+            var mappers2 = new Dictionary<string, string>();
+            var mappers = StringHelper.GetAppSettingValueOrDefault("FieldMappers", "");
+            var mappers1 = mappers.Split(',');
+            foreach (var item in mappers1)
+            {
+                var kv = item.Split(':');
+                mappers2.Add(kv[0], kv[1]);
+            }
+
+            return mappers2;
+        }
+
         public Dictionary<string, object> ReadExcel(string filePath)
         {
+            var mappers = GetFieldMappers();
             var fields = new Dictionary<string, object>();
+            var contacts = new List<ContactModel>();
             var package = new ExcelPackage(new FileInfo(filePath));
             if (package.Workbook.Worksheets.Count > 0)
             {
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[StringHelper.GetAppSettingValueOrDefault("SheetName", "")];
-                for (int i = workSheet.Dimension.Start.Column;
-                    i <= workSheet.Dimension.End.Column;
+                for (int i = workSheet.Dimension.Start.Row;
+                    i <= workSheet.Dimension.End.Row;
                     i++)
                 {
-                    for (int j = workSheet.Dimension.Start.Row;
-                            j <= workSheet.Dimension.End.Row;
-                            j++)
+                    var contact = new ContactModel();
+                    foreach (var mapperColumn in mappers)
                     {
-                        //fields.Add(workSheet.Cells[i, j].co)
-                        var cell = workSheet.Cells[i, j];
+                        var cell = workSheet.Cells[mapperColumn.Key + i.ToString()];
+                        UpdateModelValue(contact, mapperColumn.Value, cell.Value);
                         fields.Add(cell.Address, cell.Value);
                     }
+                    contacts.Add(contact);
                 }
             
             }
             return fields;
+        }
+
+        public void UpdateModelValue(ContactModel model, string propName, object value)
+        {
+            Type type = model.GetType();
+
+            PropertyInfo prop = type.GetProperty("propertyName");
+
+            prop.SetValue(model, value, null);
         }
     }
 }

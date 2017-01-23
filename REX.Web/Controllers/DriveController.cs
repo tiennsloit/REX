@@ -57,8 +57,20 @@ namespace REX.Web.Controllers
             var excels = new ExcelService();
             var dics = excels.ReadExcel(HostingEnvironment.MapPath(filePath));
             var value = dics.Where(x => x.Key == "A1").FirstOrDefault();
+            
+            
             return value.Value.ToString();
         }
+
+        
+
+        //public void BuildData(Dictionary<string, string> mappers, Dictionary<string, object> data) {
+        //    foreach (var mapper in mappers)
+        //    {
+        //        var d = data.Where(x => x.Key.StartsWith(mapper.Key));
+
+        //    }
+        //}
 
         // POST api/<controller>
         public void Post([FromBody]string value)
