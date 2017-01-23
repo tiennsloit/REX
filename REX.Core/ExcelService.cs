@@ -104,11 +104,10 @@
             return mappers2;
         }
 
-        public Dictionary<string, object> ReadExcel(string filePath)
+        public virtual ICollection<ContactModel> ReadExcel(string filePath)
         {
-            var headerHeight = 2;
+            var headerHeight = Convert.ToInt16(StringHelper.GetAppSettingValueOrDefault("HeaderHeight", "2"));
             var mappers = GetFieldMappers();
-            var fields = new Dictionary<string, object>();
             var contacts = new List<ContactModel>();
             var package = new ExcelPackage(new FileInfo(filePath));
             if (package.Workbook.Worksheets.Count > 0)
@@ -123,13 +122,12 @@
                     {
                         var cell = workSheet.Cells[mapperColumn.Key + i.ToString()];
                         UpdateModelValue(contact, mapperColumn.Value, cell.Value);
-                        fields.Add(cell.Address, cell.Value);
                     }
                     contacts.Add(contact);
                 }
             
             }
-            return fields;
+            return contacts;
         }
 
         

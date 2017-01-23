@@ -22,7 +22,7 @@ namespace REX.Core.Model
         public decimal Surcharge { get; set; }
         public decimal AmountToReceived { get; set; }
         public DateTime DateShipped { get; set; }
-        public decimal TimeCanReceived { get; set; }
+        public string TimeCanReceived { get; set; }
         public int HowManyDaysOfConsume { get; set; }
         public int HowManyWeightOfConsume { get; set; }
         public DateTime NextShipDate { get; set; }
