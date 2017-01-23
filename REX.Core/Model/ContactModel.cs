@@ -8,7 +8,7 @@ namespace REX.Core.Model
 {
     public class ContactModel
     {
-        public int Id { get; set; }
+        public double Id { get; set; }
         public string Name { get; set; }
         public string FaceBookName { get; set; }
         public string Phone1 { get; set; }
@@ -26,8 +26,8 @@ namespace REX.Core.Model
         public int HowManyDaysOfConsume { get; set; }
         public int HowManyWeightOfConsume { get; set; }
         public DateTime NextShipDate { get; set; }
-        public int Satisfied { get; set; }
-        public int Unsatisfied { get; set; }
+        public string Satisfied { get; set; }
+        public string Unsatisfied { get; set; }
         public string ReasonNotSatisfied { get; set; }
         public decimal Price2 { get; set; }
         public decimal CoverPrice { get; set; }

@@ -106,6 +106,7 @@
 
         public Dictionary<string, object> ReadExcel(string filePath)
         {
+            var headerHeight = 2;
             var mappers = GetFieldMappers();
             var fields = new Dictionary<string, object>();
             var contacts = new List<ContactModel>();
@@ -113,7 +114,7 @@
             if (package.Workbook.Worksheets.Count > 0)
             {
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[StringHelper.GetAppSettingValueOrDefault("SheetName", "")];
-                for (int i = workSheet.Dimension.Start.Row;
+                for (int i = workSheet.Dimension.Start.Row + headerHeight;
                     i <= workSheet.Dimension.End.Row;
                     i++)
                 {
@@ -131,13 +132,28 @@
             return fields;
         }
 
+        
         public void UpdateModelValue(ContactModel model, string propName, object value)
         {
             Type type = model.GetType();
 
-            PropertyInfo prop = type.GetProperty("propertyName");
-
-            prop.SetValue(model, value, null);
+            PropertyInfo prop = type.GetProperty(propName);
+            Type t = model.GetType().GetProperty(propName).PropertyType;
+            if (value != null)
+            {
+                if (t == typeof(DateTime))
+                {
+                    var d = double.Parse(value.ToString());
+                    DateTime conv = DateTime.FromOADate(d);
+                    prop.SetValue(model, conv);
+                }
+                else
+                {
+                    prop.SetValue(model, Convert.ChangeType(value, t, null));
+                }
+            }
+            else
+                prop.SetValue(model, null);
         }
     }
 }
