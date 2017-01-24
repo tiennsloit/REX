@@ -123,6 +123,12 @@
                         var cell = workSheet.Cells[mapperColumn.Key + i.ToString()];
                         UpdateModelValue(contact, mapperColumn.Value, cell.Value);
                     }
+
+                    if (contact.Id == 0)
+                    {
+                        break;
+                    }
+
                     contacts.Add(contact);
                 }
             
