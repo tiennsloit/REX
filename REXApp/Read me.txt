@@ -1,0 +1,16 @@
+NDX - gradle
+DMAKE
+
+JAVA_HOME is not set and no 'java' command could be found in your PATH
+-> install jre:http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html
+
+failed to find target with hash string 'android-23' in: C:\Users\tns\AppData\Local\Android\sdk => On SDK Manager, be sure to check the box on "show package descriptions"; then you should also select the "Google APIs" for the version you are willing to install.
+
+Execution failed for task ':app:processDebugResources'
+=> I solved the same problem by installing "Android SDK Platform 23" and "Soures for Android 23" under Android 6.0 (Marshmallow)
+
+Could not find tools.jar
+=>Type the path to the JDK in the Value field. For me the correct path with short filename was "C:\PROGRA~1\Java\jdk1.8.0_66". Your path will vary depending on the installed version.
+
+emulator -avd
+=>PATH C:\Users\tns\AppData\Local\Android\sdk\tools
