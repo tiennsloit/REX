@@ -6,43 +6,69 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import DatePicker from './controls/date-picker.android.js';
-import SceneContactDetail from './scene/scene-contact-detail';
+import ContactDetail from './components/contact-detail';
 import ListContact from './components/list-contacts';
 
 import {
   AppRegistry,
   StyleSheet,
   View,
+  Text,
   Picker,
-  Navigator
+  Navigator,
+  TouchableHighlight
 } from 'react-native';
 
 export default class REXApp extends Component {
-  
+
   render() {
     const routes = [
-    {title: 'Contact List', index: 0},
-    {title: 'Contact Detail', index: 1},
+      { title: 'Contact List', index: 0 },
+      { title: 'Contact Detail', index: 1 },
     ];
     return (
-       <Navigator
-      initialRoute={routes[0]}
-      initialRouteStack={routes}
-      renderScene={(route, navigator) => {
-        return route.index == 0 ? 
-        <ListContact title={route.title} onForward={(contact) => {   
-          debugger; 
+      <Navigator
+        initialRoute={routes[0]}
+        initialRouteStack={routes}
+
+        navigationBar={
+          <Navigator.NavigationBar
+            routeMapper={{
+              LeftButton: (route, navigator, index, navState) => {
+                if (route.index === 0) {
+                  return null;
+                } else {
+                  return (
+                    <TouchableHighlight onPress={() => navigator.pop()}>
+                      <Text>Back</Text>
+                    </TouchableHighlight>
+                  );
+                }
+
+              },
+              RightButton: (route, navigator, index, navState) =>
+              { return (<Text></Text>); },
+              Title: (route, navigator, index, navState) =>
+              { return (<Text></Text>); },
+            }}
+            style={{ backgroundColor: 'white', height: 30 }}
+            />
+        }
+        renderScene={(route, navigator) => {
+          return route.index == 0 ?
+            <ListContact title={route.title} onForward={(contact) => {
+              debugger;
               const nextIndex = route.index + 1;
               navigator.push({
                 title: 'Scene ' + nextIndex,
                 index: nextIndex,
-                passProps:contact
+                passProps: contact
               });
-            }} />
+            } } />
             :
-            <SceneContactDetail contact={route.passProps}/>
-      }}
-    />
+            <ContactDetail contact={route.passProps} />
+        } }
+        />
     );
   }
 }
