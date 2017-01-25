@@ -49,9 +49,9 @@ class ListContact extends Component {
         });
     }
 
-    showDetail(id){
+    showDetail(contact){
         debugger;
-        this.props.onForward(id);
+        this.props.onForward(contact);
     }
 
     render() {
@@ -61,7 +61,7 @@ class ListContact extends Component {
                 <ListView style={styles.container}
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) => 
-                        <TouchableHighlight onPress={(id)=>{this.showDetail(id)}}>
+                        <TouchableHighlight onPress={()=>{this.showDetail(rowData)}}>
                         <Text  style={styles.listViewItem}>{rowData.name}</Text>
                         </TouchableHighlight>
                     }

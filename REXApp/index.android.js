@@ -30,15 +30,17 @@ export default class REXApp extends Component {
       initialRouteStack={routes}
       renderScene={(route, navigator) => {
         return route.index == 0 ? 
-        <ListContact title={route.title} onForward={() => {    
+        <ListContact title={route.title} onForward={(contact) => {   
+          debugger; 
               const nextIndex = route.index + 1;
               navigator.push({
                 title: 'Scene ' + nextIndex,
                 index: nextIndex,
+                passProps:contact
               });
             }} />
             :
-            <SceneContactDetail/>
+            <SceneContactDetail contact={route.passProps}/>
       }}
     />
     );
