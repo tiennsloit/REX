@@ -4,7 +4,7 @@ import { View, Text, TextInput, Navigator, ScrollView, Linking, StyleSheet, Touc
 class ContactDetail extends Component {
   static get defaultProps() {
     return {
-
+       title:'test'
     };
   }
 

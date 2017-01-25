@@ -11,7 +11,21 @@ export default class SceneContactDetail extends Component {
   render() {
     return (
       <View>
-        <Text>Detail</Text>
+        <Text>Detail sd fsdf sd frtrt  
+        r titlert 
+        r trt rtrt
+        rtrtrtrtrt
+        r </Text>
+        <Text>Detail sd fsdf sd frtrt  
+        r titlert 
+        r trt rtrt
+        rtrtrtrtrt
+        r </Text>
+        <Text>Detail sd fsdf sd frtrt  
+        r titlert 
+        r trt rtrt
+        rtrtrtrtrt
+        r </Text>
       </View>
     )
   }

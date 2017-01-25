@@ -11,7 +11,7 @@ export default class SceneMain extends Component {
 
   render() {
     return (
-      <ListContact/>
+      <View><Text>sdfsdf sdfsd f</Text></View>
     )
   }
 }
