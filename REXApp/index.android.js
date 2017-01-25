@@ -6,21 +6,41 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import DatePicker from './controls/date-picker.android.js';
+import SceneContactDetail from './scene/scene-contact-detail';
 import ListContact from './components/list-contacts';
 
 import {
   AppRegistry,
   StyleSheet,
   View,
-  Picker
+  Picker,
+  Navigator
 } from 'react-native';
 
 export default class REXApp extends Component {
+  
   render() {
+    const routes = [
+    {title: 'Contact List', index: 0},
+    {title: 'Contact Detail', index: 1},
+    ];
     return (
-      <View>
-        <ListContact />
-      </View>
+       <Navigator
+      initialRoute={routes[0]}
+      initialRouteStack={routes}
+      renderScene={(route, navigator) => {
+        return route.index == 0 ? 
+        <ListContact title={route.title} onForward={() => {    
+              const nextIndex = route.index + 1;
+              navigator.push({
+                title: 'Scene ' + nextIndex,
+                index: nextIndex,
+              });
+            }} />
+            :
+            <SceneContactDetail/>
+      }}
+    />
     );
   }
 }

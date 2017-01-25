@@ -8,7 +8,9 @@ import {
     View,
     Alert,
     Button,
-    ListView
+    ListView,
+    TouchableHighlight
+    
 } from 'react-native';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -47,6 +49,10 @@ class ListContact extends Component {
         });
     }
 
+    showDetail(id){
+        debugger;
+        this.props.onForward(id);
+    }
 
     render() {
 
@@ -54,10 +60,10 @@ class ListContact extends Component {
             <View>
                 <ListView style={styles.container}
                     dataSource={this.state.mainListData}
-                    renderRow={(rowData) => <View>
-                        <Text style={styles.listViewItem}>{rowData.name}</Text>
-
-                    </View>
+                    renderRow={(rowData) => 
+                        <TouchableHighlight onPress={(id)=>{this.showDetail(id)}}>
+                        <Text  style={styles.listViewItem}>{rowData.name}</Text>
+                        </TouchableHighlight>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}

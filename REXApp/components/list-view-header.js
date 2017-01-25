@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 class Header extends Component {
     filterData(text) {
-        debugger;
+      
         this.props.filterDataFunction(text);
     }
     render() {
