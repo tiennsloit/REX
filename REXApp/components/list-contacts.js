@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import Api from '../api/api';
 import Header from '../components/list-view-header';
+import {Actions} from 'react-native-router-flux';
 import {
     StyleSheet,
     Text,
@@ -50,8 +51,7 @@ class ListContact extends Component {
     }
 
     showDetail(contact){
-        debugger;
-        this.props.onForward(contact);
+       Actions.contactDetail(contact);
     }
 
     render() {
