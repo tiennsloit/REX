@@ -31,8 +31,8 @@ class ContactDetail extends Component {
   render() {
 
     return (
-      <View style={styles.detail}>
-        <ScrollView>
+      <View >
+        <ScrollView style={styles.detail}>
           <View style={styles.row}>
             <Text style={styles.label}>Tên:</Text>
             <TextInput style={styles.input} value={this.props.name} />

@@ -23,12 +23,13 @@ class NavigatorMain extends Component {
 
         return <Router>
             <Scene key="root">
-                <Scene key="contactList" hideNavBar={true} component={ListContact} title="List of contacts" />
-                <Scene key="contactDetail" tabBarStyle={styles.tabBarStyle} tabs={true} hideNavBar={false} title="Contact details">
+                <Scene key="contactList"  hideNavBar={true} component={ListContact} title="List of contacts" />
+                <Scene key="contactDetail"  tabBarStyle={styles.tabBarStyle} tabs={true} hideNavBar={false} title="Contact details">
                     <Scene
                         key="tabBasicInfo"
                         icon={TabIcon}
                         title="Tin đặt hàng" 
+                        navigationBarStyle={styles.navi}
                         onSelect={() => {
                             Actions.tabInfo({ type: ActionConst.REFRESH });
                         } }
@@ -39,6 +40,7 @@ class NavigatorMain extends Component {
                         key="tabSummary"
                         title="Thống kê"
                         icon={TabIcon}
+                        navigationBarStyle={styles.navi}
                         onSelect={() => {
                             Actions.tabSum({ type: ActionConst.REFRESH });
                         } }
@@ -53,7 +55,8 @@ class NavigatorMain extends Component {
 
 const styles = StyleSheet.create({
     navi: {
-        width: 100,
+        backgroundColor:'grey',
+        opacity: 0.5
     },
     tabBarStyle: {
         borderTopWidth: .5,
