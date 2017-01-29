@@ -26,11 +26,17 @@ namespace REX.API
             config.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
             // Web API routes
 
-            config.Routes.MapHttpRoute(
-                name: "CustomApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { controller="District", action = "District", id = RouteParameter.Optional }
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "ContactApi",
+            //    routeTemplate: "api/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Contact", action = "Contact", id = RouteParameter.Optional }
+            //);
+
+            //config.Routes.MapHttpRoute(
+            //    name: "DistrictApi",
+            //    routeTemplate: "api/{controller}/{action}/{id}",
+            //    defaults: new { controller = "District", action = "District", id = RouteParameter.Optional }
+            //);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

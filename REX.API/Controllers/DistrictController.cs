@@ -29,6 +29,11 @@ namespace REX.API.Controllers
         }
 
         // POST api/<controller>
+        /// <summary>
+        /// Can test with postman using http://tyuiop.com/api/district/postdistrict
+        /// </summary>
+        /// <param name="district"></param>
+        /// <returns></returns>
         public string PostDistrict(District district)
         {
             _districtService.InsertDistrict(district.Name);

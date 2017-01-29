@@ -29,8 +29,14 @@ namespace REX.API.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        /// <summary>
+        /// Can test with postman using http://tyuiop.com/api/contact/postcontact
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string PostContact([FromBody]string value)
         {
+            return "True";
         }
 
         // PUT api/<controller>/5
