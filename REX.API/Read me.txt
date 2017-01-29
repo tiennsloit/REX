@@ -1,0 +1,2 @@
+http://www.dotnetcurry.com/windows-azure/883/host-aspnet-mvc-azure-without-database
+https://www.codeproject.com/Articles/680116/Code-First-with-SQL-CE
