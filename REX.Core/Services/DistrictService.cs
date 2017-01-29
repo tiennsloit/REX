@@ -28,5 +28,6 @@ namespace REX.Core.Services
                 return dbContext.Districts.ToList();
             }
         }
+
     }
 }
