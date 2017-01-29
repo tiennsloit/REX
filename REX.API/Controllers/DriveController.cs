@@ -23,6 +23,11 @@ namespace REX.API.Controllers
             return new string[] { "value1", "value2" };
         }
 
+        public string GetValue()
+        {
+            return "";
+        }
+
         // GET api/<controller>/5
         public ICollection<ContactModel> Get(int id)
         {
