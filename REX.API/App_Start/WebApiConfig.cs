@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using REX.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,10 @@ namespace REX.API
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+            var container = UnityConfig.RegisterComponents();
+
+            //DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));
+            config.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -33,7 +39,6 @@ namespace REX.API
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            
         }
     }
 }
