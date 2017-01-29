@@ -13,7 +13,7 @@ namespace REX.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701291003101_StartUp"; }
+            get { return "201701291011079_StartUp"; }
         }
         
         string IMigrationMetadata.Source

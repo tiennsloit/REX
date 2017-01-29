@@ -24,7 +24,7 @@ namespace REX.Data.Migrations
                         NextShipDate = c.DateTime(nullable: false),
                         Satisfied = c.String(maxLength: 50),
                         Unsatisfied = c.String(maxLength: 50),
-                        ReasonNotSatisfied = c.String(maxLength: 4000),
+                        ReasonNotSatisfied = c.String(maxLength: 1000),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Districts", t => t.DistrictId, cascadeDelete: true)
@@ -75,7 +75,7 @@ namespace REX.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TimeInDay = c.String(maxLength: 4000),
+                        TimeInDay = c.String(maxLength: 500),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -100,29 +100,49 @@ namespace REX.Data.Migrations
                         Received = c.Decimal(nullable: false, precision: 18, scale: 2),
                         DateShipped = c.DateTime(nullable: false),
                         IsNew = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        DateModified = c.DateTime(nullable: false),
+                        UserId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contacts", t => t.ContactId, cascadeDelete: true)
                 .ForeignKey("dbo.RiceTypes", t => t.RiceType1Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.ContactId)
-                .Index(t => t.RiceType1Id);
+                .Index(t => t.RiceType1Id)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserName = c.String(maxLength: 100),
+                        Email = c.String(maxLength: 100),
+                        IsActived = c.Boolean(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Orders", "UserId", "dbo.Users");
             DropForeignKey("dbo.Orders", "RiceType1Id", "dbo.RiceTypes");
             DropForeignKey("dbo.Orders", "ContactId", "dbo.Contacts");
             DropForeignKey("dbo.Contacts", "TimeCanReceivedId", "dbo.TimeADays");
             DropForeignKey("dbo.Favourites", "RiceTypeId", "dbo.RiceTypes");
             DropForeignKey("dbo.Favourites", "ContactId", "dbo.Contacts");
             DropForeignKey("dbo.Contacts", "DistrictId", "dbo.Districts");
+            DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.Orders", new[] { "RiceType1Id" });
             DropIndex("dbo.Orders", new[] { "ContactId" });
             DropIndex("dbo.Favourites", new[] { "RiceTypeId" });
             DropIndex("dbo.Favourites", new[] { "ContactId" });
             DropIndex("dbo.Contacts", new[] { "TimeCanReceivedId" });
             DropIndex("dbo.Contacts", new[] { "DistrictId" });
+            DropTable("dbo.Users");
             DropTable("dbo.Orders");
             DropTable("dbo.TimeADays");
             DropTable("dbo.RiceTypes");
