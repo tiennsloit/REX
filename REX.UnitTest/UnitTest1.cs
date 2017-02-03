@@ -7,13 +7,46 @@ using Google.Apis.Services;
 using System.Collections;
 using Google.Apis.Drive.v2.Data;
 using System.Collections.Generic;
+using REX.Core.Services;
+using REX.Data;
 
 namespace REX.UnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1:TestBase
     {
-       
+
+        [TestMethod]
+        public void CreateContact()
+        {
+            var contactService = this.GetService<IContactService>();
+            var fav = new Favourite
+            {
+                IsCurrently = true,
+                Price1 = 400,
+                Price2 = 600,
+                RiceTypeId = 1,
+                Weight = 6
+            };
+
+            contactService.CreateContact(new Contact
+            {
+                Address = "12A Trieu Viet Vuong, P9, Da Lat, Lam Dong",
+                DistrictId = 1,
+                FaceBookName = "tiens facebook",
+                HowManyDaysOfConsume = 20,
+                HowManyWeightOfConsume = 4,
+                Name = "Tien Nguyen",
+                NextShipDate = new DateTime(),
+                Phone1 = "0902156066",
+                Phone2 = "0903032892",
+                ReasonNotSatisfied = "no reason",
+                TimeCanReceivedId = 1,
+                Satisfied = "",
+                Unsatisfied = "",
+                Favourites = new List<Favourite> { fav }
+            });
+        }
         [TestMethod]
         public void TestMethod1()
         {

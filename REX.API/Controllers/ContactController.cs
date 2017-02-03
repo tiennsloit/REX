@@ -34,7 +34,7 @@ namespace REX.API.Controllers
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public string PostContact([FromBody]string value)
+        public string PostContact(Contact contact)
         {
             return "True";
         }

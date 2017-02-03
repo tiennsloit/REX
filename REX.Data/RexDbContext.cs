@@ -20,5 +20,6 @@ namespace REX.Data
         public DbSet<RiceType> RiceType { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<District> Districts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
