@@ -22,14 +22,24 @@ namespace REX.UnitTest
             get { return _unityContainer ?? (_unityContainer = UnityConfiger.GetUnityContainer()); }
         }
 
-        private static IServiceLocator ServiceLocator
+        private static IServiceLocator RexServiceLocator
         {
-            get { return _serviceLocator ?? (_serviceLocator = UnityContainer.Resolve<IServiceLocator>()); }
+            get
+            {
+                if (_serviceLocator == null)
+                {
+                    ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(UnityContainer));
+                    _serviceLocator = ServiceLocator.Current;
+                    return _serviceLocator;
+                }
+                
+                return null;
+            }
         }
 
         protected TService GetService<TService>()
         {
-            return ServiceLocator.GetInstance<TService>();
+            return RexServiceLocator.GetInstance<TService>();
         }
     }
 }
