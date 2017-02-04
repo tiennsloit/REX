@@ -19,18 +19,18 @@ namespace REX.API.Controllers
             _contactService = contactService;
         }
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            return "";
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public ICollection<Order> GetOrder(int contactId)
         {
-            return "value";
+            return _orderService.GetOrders(contactId);
         }
 
-        [Route("user/{userId}/order")]
+        [Route("orderByDefault/{userId}")]
         public Order GetOrderByDefault(int userId)
         {
             var defaultContact = _contactService.DefaultNewContact();
@@ -39,8 +39,10 @@ namespace REX.API.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public string PostOrder(Order order)
         {
+            _orderService.CreateOrder(order);
+            return "true";
         }
 
         // PUT api/<controller>/5
