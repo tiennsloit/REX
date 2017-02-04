@@ -33,7 +33,7 @@ namespace REX.UnitTest
                     return _serviceLocator;
                 }
                 
-                return null;
+                return _serviceLocator;
             }
         }
 

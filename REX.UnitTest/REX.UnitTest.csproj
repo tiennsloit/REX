@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderTest.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="ContactTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

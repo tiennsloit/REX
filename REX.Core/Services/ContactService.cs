@@ -33,6 +33,18 @@ namespace REX.Core.Services
             return contact;
         }
 
+        public ICollection<Contact> GetContacts()
+        {
+            var contacts = new List<Contact>();
+            using (var dbContext = new RexDbContext())
+            {
+                //todo: filter by isActived property
+                contacts = dbContext.Contacts.ToList();
+            }
+
+            return contacts;
+        }
+
         public Contact GetContact(string name)
         {
             var contact = new Contact();

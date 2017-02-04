@@ -1,4 +1,5 @@
 ﻿using REX.Data;
+using System.Collections.Generic;
 
 namespace REX.Core.Services
 {
@@ -6,5 +7,6 @@ namespace REX.Core.Services
     {
         void CreateUser(User user);
         User GetUser(string userId);
+        ICollection<User> GetUsers();
     }
 }

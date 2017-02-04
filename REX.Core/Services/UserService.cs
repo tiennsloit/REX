@@ -27,5 +27,15 @@ namespace REX.Core.Services
             }
             return user;
         }
+
+        public ICollection<User> GetUsers()
+        {
+            var users = new List<User>();
+            using (var dbContext = new RexDbContext())
+            {
+                users = dbContext.Users.Where(x => x.IsActived == true).ToList();
+            }
+            return users;
+        }
     }
 }

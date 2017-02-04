@@ -1,5 +1,6 @@
 ﻿using REX.Data;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,50 @@ namespace REX.Core.Services
 
             return order;
         }
+
+        public void RemoveOrder(int id)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var o = dbContext.Orders.Attach(new Order { Id = id});
+                dbContext.Orders.Remove(o);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public Order GetOrder(int id)
+        {
+            var res = new Order();
+            using (var dbContext = new RexDbContext())
+            {
+                res = dbContext.Orders.Where(x => x.Id == id).FirstOrDefault();
+            }
+
+            return res;
+        }
+
+        public ICollection<Order> GetOrders(int contactId)
+        {
+            var res = new List<Order>();
+            using (var dbContext = new RexDbContext())
+            {
+                res = dbContext.Orders.Where(x => x.ContactId == contactId).ToList();
+            }
+
+            return res;
+        }
+
+        public ICollection<Order> GetOrders()
+        {
+            var res = new List<Order>();
+            using (var dbContext = new RexDbContext())
+            {
+                res = dbContext.Orders.Where(x => x.IsNew == true).ToList();
+            }
+
+            return res;
+        }
+
 
         public Order DefaultNewOrder(int userId, int contactId)
         {
@@ -45,6 +90,16 @@ namespace REX.Core.Services
                 ContactId = contactId,
                 IsDeleted = false
             };
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var orderUpdating = dbContext.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
+                dbContext.Entry(orderUpdating).CurrentValues.SetValues(order);
+                dbContext.SaveChanges();
+            }
         }
     }
 }
