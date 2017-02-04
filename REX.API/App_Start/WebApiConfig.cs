@@ -15,8 +15,11 @@ namespace REX.API
     {
         public static void Register(HttpConfiguration config)
         {
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
             // Web API configuration and services
-            
+
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
