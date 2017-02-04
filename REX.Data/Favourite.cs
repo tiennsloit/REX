@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace REX.Data
         public int Id { get; set; }
         [ForeignKey("Contact")]
         public int ContactId { get; set; }
+        [JsonIgnore]
         public Contact Contact { get; set; }
         public RiceType RiceType { get; set; }
         [ForeignKey("RiceType")]
