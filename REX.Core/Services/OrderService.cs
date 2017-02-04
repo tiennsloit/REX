@@ -67,6 +67,14 @@ namespace REX.Core.Services
 
         public Order DefaultNewOrder(int userId, int contactId)
         {
+            var order = DefaultNewOrderOriginal();
+            order.UserId = userId;
+            order.ContactId = contactId;
+            return order;
+        }
+
+        private Order DefaultNewOrderOriginal()
+        {
             return new Order
             {
                 AmountToReceived = 0,
@@ -85,11 +93,17 @@ namespace REX.Core.Services
                 RiceType1Id = 1,
                 Surcharge = 0,
                 TotalPrice = 0,
-                UserId = userId,
                 Weight = 10,
-                ContactId = contactId,
-                IsDeleted = false
+                IsDeleted = false,
             };
+        }
+
+        public Order DefaultNewOrder(int userId, Contact contact)
+        {
+            var order = DefaultNewOrderOriginal();
+            order.UserId = userId;
+            order.Contact = contact;
+            return order;
         }
 
         public void UpdateOrder(Order order)

@@ -56,5 +56,34 @@ namespace REX.UnitTest
             var refetch = orderService.GetOrder(newOrder.Id);
             Assert.AreEqual(null, refetch);
         }
+
+        [TestMethod]
+        public void CreateOrder_With_New_Contact()
+        {
+            var users = userService.GetUsers();
+            var contact = contactService.DefaultNewContact();
+            contact.Name = "contact1";
+            var order = orderService.DefaultNewOrder(users.First().Id, contact);
+            var resultCreated = orderService.CreateOrder(order);
+
+            //check success created?
+            var refetchOrder = orderService.GetOrder(resultCreated.Id);
+            Assert.AreNotEqual(null, refetchOrder);
+
+            //check there is 1 order and 1 contact
+            var refetchContact = contactService.GetContact("contact1");
+            Assert.AreNotEqual(null, refetchContact);
+
+            //remove contact and order
+            //orderService.RemoveOrder(refetchOrder.Id); //not work
+            contactService.RemoveContact("contact1");
+
+            //check has remove test data: both contact and order
+            var removedOrder = orderService.GetOrder(resultCreated.Id);
+            Assert.AreEqual(null, removedOrder);
+            var removedContact = contactService.GetContact("contact1");
+            Assert.AreEqual(null, removedContact);
+
+        }
     }
 }
