@@ -64,6 +64,10 @@
     <Compile Include="Migrations\201701291011079_StartUp.Designer.cs">
       <DependentUpon>201701291011079_StartUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702041235211_isDelete_Order.cs" />
+    <Compile Include="Migrations\201702041235211_isDelete_Order.Designer.cs">
+      <DependentUpon>201702041235211_isDelete_Order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +83,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701291011079_StartUp.resx">
       <DependentUpon>201701291011079_StartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702041235211_isDelete_Order.resx">
+      <DependentUpon>201702041235211_isDelete_Order.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

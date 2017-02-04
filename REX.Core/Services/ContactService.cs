@@ -45,6 +45,36 @@ namespace REX.Core.Services
             return contact;
         }
 
+        public Contact DefaultNewContact()
+        {
+            var fav = new Favourite
+            {
+                IsCurrently = true,
+                Price1 = 0,
+                Price2 = 0,
+                RiceTypeId = 1,
+                Weight = 0
+
+            };
+            return new Contact
+            {
+                Address = "",
+                DistrictId = 1,
+                FaceBookName = "",
+                HowManyDaysOfConsume = 30,
+                HowManyWeightOfConsume = 10,
+                Name = "",
+                NextShipDate = DateTime.Now,
+                Phone1 = "",
+                Phone2 = "",
+                ReasonNotSatisfied = "",
+                TimeCanReceivedId = 1,
+                Satisfied = "",
+                Unsatisfied = "",
+                Favourites = new List<Favourite> { fav }
+            };
+        }
+
         public void RemoveContact(int contactId)
         {
             using (var dbContext = new RexDbContext())

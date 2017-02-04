@@ -15,5 +15,6 @@ namespace REX.Core.Services
         Contact GetContact(int id);
         void RemoveContact(int contactId);
         void RemoveContact(string contactName);
+        Contact DefaultNewContact();
     }
 }

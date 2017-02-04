@@ -35,5 +35,6 @@ namespace REX.Data
         [ForeignKey("User")]
         public int UserId { get; set; }
         public User User { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
