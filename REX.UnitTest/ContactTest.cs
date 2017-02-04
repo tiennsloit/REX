@@ -9,43 +9,28 @@ using Google.Apis.Drive.v2.Data;
 using System.Collections.Generic;
 using REX.Core.Services;
 using REX.Data;
+using System.Linq;
 
 namespace REX.UnitTest
 {
     [TestClass]
-    public class UnitTest1:TestBase
+    public class ContactTest:TestBase
     {
+        public IContactService contactService;
+        [TestInitialize()]
+        public void Init()
+        {
+            contactService = this.GetService<IContactService>();
+        }
 
         [TestMethod]
         public void CreateContact()
         {
-            var contactService = this.GetService<IContactService>();
-            var fav = new Favourite
-            {
-                IsCurrently = true,
-                Price1 = 400,
-                Price2 = 600,
-                RiceTypeId = 1,
-                Weight = 6
-            };
-
-            contactService.CreateContact(new Contact
-            {
-                Address = "12A Trieu Viet Vuong, P9, Da Lat, Lam Dong",
-                DistrictId = 1,
-                FaceBookName = "tiens facebook",
-                HowManyDaysOfConsume = 20,
-                HowManyWeightOfConsume = 4,
-                Name = "Tien Nguyen",
-                NextShipDate = DateTime.Now,
-                Phone1 = "0902156066",
-                Phone2 = "0903032892",
-                ReasonNotSatisfied = "no reason",
-                TimeCanReceivedId = 1,
-                Satisfied = "",
-                Unsatisfied = "",
-                Favourites = new List<Favourite> { fav }
-            });
+            var newContact = contactService.CreateContact(TemplateNewContact("test new contact"));
+            contactService.RemoveContact("test new contact");
+            Assert.AreNotEqual(null, newContact);
+            var contactRefetch = contactService.GetContact("test new contact");
+            Assert.AreEqual(null, contactRefetch);
         }
 
         public Contact TemplateNewContact(string name)
@@ -79,24 +64,84 @@ namespace REX.UnitTest
         }
 
         [TestMethod]
-        public void UpdateContact_NewFav()
+        public void UpdateContact_NewFavourite()
         {
-            var contactService = this.GetService<IContactService>();
+            
             var ct = TemplateNewContact("Bich Tuyen");
             //create a contact first
             contactService.CreateContact(ct);
-            ct.Phone1 = "abc";
+            ct.Phone1 = "abc1";
             //make a new favourite
+            ct.Favourites = new List<Favourite> { new Favourite {
+            IsCurrently = true,
+                Price1 = 400,
+                Price2 = 700,
+                RiceTypeId = 1,
+                Weight = 10} };
             contactService.UpdateContact(ct);
 
             var updatedContact = contactService.GetContact("Bich Tuyen");
             //clean test data
             contactService.RemoveContact("Bich Tuyen");
-            Assert.AreEqual("abc", updatedContact.Phone1);
+            Assert.AreEqual("abc1", updatedContact.Phone1);
+            Assert.AreEqual(1, updatedContact.Favourites.Where(x=>x.Weight == 10).Count());
 
         }
 
         [TestMethod]
+        public void UpdateContact_AddOneMoreFavourite()
+        {
+            
+            var ct = TemplateNewContact("Bich Tuyen");
+            //create a contact first
+            contactService.CreateContact(ct);
+            ct.Phone1 = "abc1";
+            //make a new favourite
+            ct.Favourites.Add( new Favourite {
+            IsCurrently = true,
+                Price1 = 400,
+                Price2 = 700,
+                RiceTypeId = 1,
+                Weight = 999} );
+            contactService.UpdateContact(ct);
+
+            var updatedContact = contactService.GetContact("Bich Tuyen");
+            //clean test data
+            contactService.RemoveContact("Bich Tuyen");
+            Assert.AreEqual("abc1", updatedContact.Phone1);
+            Assert.AreEqual(1, updatedContact.Favourites.Where(x => x.Weight == 6).Count());
+            Assert.AreEqual(1, updatedContact.Favourites.Where(x => x.Weight == 999).Count());
+            Assert.AreEqual(2, updatedContact.Favourites.Count());
+            //check if the test data has been removed
+            var refetch = contactService.GetContact("Bich Tuyen");
+            Assert.AreEqual(null, refetch);
+
+        }
+
+        [TestMethod]
+        public void UpdateContact_UpdateExistingFavourite()
+        {
+           
+            var ct = TemplateNewContact("Bich Tuyen");
+            //create a contact first
+            contactService.CreateContact(ct);
+            ct.Phone1 = "abc1";
+            //make a new favourite
+            ct.Favourites.First().Price1 = 100000;
+            contactService.UpdateContact(ct);
+
+            var updatedContact = contactService.GetContact("Bich Tuyen");
+            //clean test data
+            contactService.RemoveContact("Bich Tuyen");
+            Assert.AreEqual(100000, updatedContact.Favourites.First().Price1);
+            //check if the test data has been removed
+            var refetch = contactService.GetContact("Bich Tuyen");
+            Assert.AreEqual(null, refetch);
+
+        }
+
+
+        //[TestMethod]
         public void TestMethod1()
         {
             var services = new DriveService(new BaseClientService.Initializer()
