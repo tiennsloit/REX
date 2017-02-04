@@ -21,6 +21,52 @@ namespace REX.Core.Services
             Update(contact);
         }
 
+        public Contact GetContact(int contactId)
+        {
+            var contact = new Contact();
+            using (var dbContext = new RexDbContext())
+            {
+                //todo: filter by isActived property
+                contact = dbContext.Contacts.Where(x => x.Id == contactId).FirstOrDefault();
+            }
+
+            return contact;
+        }
+
+        public Contact GetContact(string name)
+        {
+            var contact = new Contact();
+            using (var dbContext = new RexDbContext())
+            {
+                //todo: filter by isActived property
+                contact = dbContext.Contacts.Where(x => x.Name == name).FirstOrDefault();
+            }
+
+            return contact;
+        }
+
+        public void RemoveContact(int contactId)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var contact = GetContact(contactId);
+                dbContext.Contacts.Attach(contact);
+                dbContext.Contacts.Remove(contact);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void RemoveContact(string contactName)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var contact = GetContact(contactName);
+                dbContext.Contacts.Attach(contact);
+                dbContext.Contacts.Remove(contact);
+                dbContext.SaveChanges();
+            }
+        }
+
         private void Update(Contact model)
         {
             using (var dbContext = new RexDbContext())

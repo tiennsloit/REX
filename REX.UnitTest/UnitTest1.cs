@@ -37,7 +37,7 @@ namespace REX.UnitTest
                 HowManyDaysOfConsume = 20,
                 HowManyWeightOfConsume = 4,
                 Name = "Tien Nguyen",
-                NextShipDate = new DateTime(),
+                NextShipDate = DateTime.Now,
                 Phone1 = "0902156066",
                 Phone2 = "0903032892",
                 ReasonNotSatisfied = "no reason",
@@ -47,6 +47,55 @@ namespace REX.UnitTest
                 Favourites = new List<Favourite> { fav }
             });
         }
+
+        public Contact TemplateNewContact(string name)
+        {
+            var fav = new Favourite
+            {
+                IsCurrently = true,
+                Price1 = 400,
+                Price2 = 700,
+                RiceTypeId = 1,
+                Weight = 6
+
+            };
+            return new Contact
+            {
+                Address = "12A Trieu Viet Vuong, P9, Da Lat, Lam Dong",
+                DistrictId = 1,
+                FaceBookName = "tiens facebook",
+                HowManyDaysOfConsume = 20,
+                HowManyWeightOfConsume = 4,
+                Name = name,
+                NextShipDate = DateTime.Now,
+                Phone1 = "0902156066",
+                Phone2 = "0903032892",
+                ReasonNotSatisfied = "no reason 1",
+                TimeCanReceivedId = 1,
+                Satisfied = "",
+                Unsatisfied = "",
+                Favourites = new List<Favourite> { fav }
+            };
+        }
+
+        [TestMethod]
+        public void UpdateContact_NewFav()
+        {
+            var contactService = this.GetService<IContactService>();
+            var ct = TemplateNewContact("Bich Tuyen");
+            //create a contact first
+            contactService.CreateContact(ct);
+            ct.Phone1 = "abc";
+            //make a new favourite
+            contactService.UpdateContact(ct);
+
+            var updatedContact = contactService.GetContact("Bich Tuyen");
+            //clean test data
+            contactService.RemoveContact("Bich Tuyen");
+            Assert.AreEqual("abc", updatedContact.Phone1);
+
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
