@@ -12,9 +12,11 @@ namespace REX.Core.Tools
     {
         public static bool IsEqual(this Favourite favourite1, Favourite favourite2)
         {
-            var jsonFav1 = new JavaScriptSerializer().Serialize(favourite1);
-            var jsonFav2 = new JavaScriptSerializer().Serialize(favourite2);
-            return jsonFav1 == jsonFav2;
+            return favourite1.ContactId == favourite2.ContactId
+                && favourite1.Price1 == favourite2.Price1
+                && favourite1.Price2 == favourite2.Price2
+                && favourite1.RiceTypeId == favourite2.RiceTypeId
+                && favourite1.Weight == favourite2.Weight;
         }
     }
 }

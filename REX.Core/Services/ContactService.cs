@@ -27,7 +27,7 @@ namespace REX.Core.Services
             using (var dbContext = new RexDbContext())
             {
                 //todo: filter by isActived property
-                contact = dbContext.Contacts.Where(x => x.Id == contactId).FirstOrDefault();
+                contact = dbContext.Contacts.Where(x => x.Id == contactId).Include(t=>t.Favourites).FirstOrDefault();
             }
 
             return contact;

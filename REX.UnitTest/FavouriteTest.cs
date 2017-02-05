@@ -124,7 +124,7 @@ namespace REX.UnitTest
             //
             var fav1 = new Favourite
             {
-                IsCurrently = true,
+                IsCurrently = false,
                 Price1 = 400,
                 Price2 = 700,
                 RiceTypeId = 1,
@@ -151,8 +151,8 @@ namespace REX.UnitTest
 
             var mergedList = favouriteService.MergeFavourites(favNew, new List<Favourite> { fav1, fav2 });
             Assert.AreEqual(2, mergedList.Count);
-
             Assert.AreEqual(1, mergedList.Where(x => x.IsCurrently).Count());
+            Assert.AreEqual(800, mergedList.Where(x => x.IsCurrently).First().Price2);
 
         }
 

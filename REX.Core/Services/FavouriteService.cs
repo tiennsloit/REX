@@ -19,19 +19,21 @@ namespace REX.Core.Services
         public ICollection<Favourite> MergeFavourites(Favourite latestFavourite, ICollection<Favourite> allFavourites)
         {
             var res = allFavourites;
+
+            latestFavourite.IsCurrently = true;
             if (res == null || !res.Any())
             {
-                latestFavourite.IsCurrently = true;
                 return new List<Favourite> { latestFavourite };
             }
 
             if (allFavourites.Where(x => x.IsEqual(latestFavourite)).Count() == 0)
             {
-                latestFavourite.IsCurrently = true;
                 foreach (var fav in allFavourites)
                 {
                     fav.IsCurrently = false;
+                   
                 }
+                latestFavourite.Id = 0; //make sure this item's id be 0 so that the dbcontext will add a new item
                 res.Add(latestFavourite);
             }
             else
@@ -50,6 +52,14 @@ namespace REX.Core.Services
             }
 
             return res;
+        }
+
+        public ICollection<Favourite> GetFavourites(int contactId)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                return dbContext.Favourites.Where(x => x.ContactId == contactId).ToList();
+            }
         }
     }
 }

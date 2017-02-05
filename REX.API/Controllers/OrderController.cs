@@ -13,10 +13,12 @@ namespace REX.API.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IContactService _contactService;
-        public OrderController(IOrderService orderService, IContactService contactService)
+        private readonly IFavouriteService _favouriteService;
+        public OrderController(IOrderService orderService, IContactService contactService, IFavouriteService favouriteService)
         {
             _orderService = orderService;
             _contactService = contactService;
+            _favouriteService = favouriteService;
         }
         // GET api/<controller>
         public string Get()
@@ -30,17 +32,29 @@ namespace REX.API.Controllers
             return _orderService.GetOrders(contactId);
         }
 
-        [Route("orderByDefault/{userId}")]
-        public Order GetOrderByDefault(int userId)
+        [Route("orderByDefault/{userId}/{contactId}")]
+        public Order GetOrderByDefault(int userId, int? contactId = null)
         {
-            var defaultContact = _contactService.DefaultNewContact();
-            var defaultOrder = _orderService.DefaultNewOrder(userId, defaultContact);
+            var contact = new Contact();
+            if (contactId == null)
+            {
+                contact = _contactService.DefaultNewContact();
+            }
+            else
+            {
+                contact = _contactService.GetContact(contactId.Value);
+            }
+             
+            var defaultOrder = _orderService.DefaultNewOrder(userId, contact);
+
             return defaultOrder;
         }
-
+        
         // POST api/<controller>
         public string PostOrder(Order order)
         {
+            //merge favourite
+            order.Contact.Favourites = _favouriteService.MergeFavourites(order.Contact.Favourites.FirstOrDefault(), _favouriteService.GetFavourites(order.ContactId));
             _orderService.CreateOrder(order);
             return "true";
         }

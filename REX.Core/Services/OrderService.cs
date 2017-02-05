@@ -10,10 +10,21 @@ namespace REX.Core.Services
 {
     public class OrderService: IOrderService
     {
+        private readonly IContactService _contactService;
+        public OrderService(IContactService contactService)
+        {
+            _contactService = contactService;
+        }
         public Order CreateOrder(Order order)
         {
             using (var dbContext = new RexDbContext())
             {
+                if(order.Contact.Id > 0)
+                {
+                    _contactService.UpdateContact(order.Contact);
+                    var updatedContact = _contactService.GetContact(order.Contact.Id);
+                    order.Contact = null;
+                }
                 dbContext.Orders.Add(order);
                 dbContext.SaveChanges();
             }
@@ -48,7 +59,7 @@ namespace REX.Core.Services
             using (var dbContext = new RexDbContext())
             {
                 res = dbContext.Orders
-                    .Include(e => e.Contact)
+                    .Include(e => e.Contact.Favourites.Select(t=>t.RiceType))
                     .Include(e=>e.RiceType)
                     .Include(e=>e.User)
                     .Where(x => x.ContactId == contactId).ToList();

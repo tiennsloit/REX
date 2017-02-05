@@ -30,7 +30,7 @@ namespace REX.Data
         /// Changes
         /// </summary>
         /// 
-        [JsonIgnore]
+       
         public virtual ICollection<Favourite> Favourites { get; set; }
         public TimeADay TimeCanReceived { get; set; }
         [ForeignKey("TimeCanReceived")]
@@ -44,6 +44,6 @@ namespace REX.Data
         public string Unsatisfied { get; set; }
         [MaxLength(1000)]
         public string ReasonNotSatisfied { get; set; }
-        
+                
     }
 }
