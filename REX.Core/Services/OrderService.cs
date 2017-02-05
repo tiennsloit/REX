@@ -47,7 +47,11 @@ namespace REX.Core.Services
             var res = new List<Order>();
             using (var dbContext = new RexDbContext())
             {
-                res = dbContext.Orders.Include(e => e.Contact.Favourites).Where(x => x.ContactId == contactId).ToList();
+                res = dbContext.Orders
+                    .Include(e => e.Contact.Favourites)
+                    .Include(e=>e.RiceType)
+                    .Include(e=>e.User)
+                    .Where(x => x.ContactId == contactId).ToList();
             }
 
             return res;
