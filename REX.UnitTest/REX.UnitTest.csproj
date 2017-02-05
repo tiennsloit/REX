@@ -134,6 +134,7 @@
     <Compile Include="TestBase.cs" />
     <Compile Include="ContactTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FavouriteTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
