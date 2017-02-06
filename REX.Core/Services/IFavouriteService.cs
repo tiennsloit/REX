@@ -7,5 +7,6 @@ namespace REX.Core.Services
     {
         ICollection<Favourite> MergeFavourites(Favourite latestFavourite, ICollection<Favourite> allFavourites);
         ICollection<Favourite> GetFavourites(int contactId);
+        Favourite GetCurrentFavourite(int contactId);
     }
 }

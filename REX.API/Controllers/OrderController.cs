@@ -32,12 +32,32 @@ namespace REX.API.Controllers
             return _orderService.GetOrders(contactId);
         }
 
+        /// <summary>
+        /// Gets the order with all favourites.
+        /// </summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns></returns>
         public Order GetOrder(int Id)
         {
+            //todo:load the current favourite to the order
             return _orderService.GetOrder(Id);
         }
 
-        [Route("orderByDefault/{userId}/{contactId}")]
+        /// <summary>
+        /// Gets the order with only current favourite.
+        /// </summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns></returns>
+        /// 
+        [Route("GetOrderCurrentFavourite/{id}")]
+        public Order GetOrderCurrentFavourite(int Id)
+        {
+            var order = _orderService.GetOrder(Id);
+            order.Contact.Favourites = new List<Favourite> { _favouriteService.GetCurrentFavourite(order.ContactId) };
+            return order;
+        }
+
+        [Route("GetOrderByDefault/{userId}/{contactId}")]
         public Order GetOrderByDefault(int userId, int? contactId = null)
         {
             var contact = new Contact();

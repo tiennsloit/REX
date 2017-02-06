@@ -61,5 +61,13 @@ namespace REX.Core.Services
                 return dbContext.Favourites.Where(x => x.ContactId == contactId).ToList();
             }
         }
+
+        public Favourite GetCurrentFavourite(int contactId)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                return dbContext.Favourites.Where(x => x.ContactId == contactId && x.IsCurrently == true).FirstOrDefault();
+            }
+        }
     }
 }
