@@ -12,5 +12,5 @@ Execution failed for task ':app:processDebugResources'
 Could not find tools.jar
 =>Type the path to the JDK in the Value field. For me the correct path with short filename was "C:\PROGRA~1\Java\jdk1.8.0_66". Your path will vary depending on the installed version.
 
-emulator -avd
+emulator -avd (or android avd)
 =>PATH C:\Users\tns\AppData\Local\Android\sdk\tools

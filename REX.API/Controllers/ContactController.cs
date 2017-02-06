@@ -11,15 +11,15 @@ namespace REX.API.Controllers
 {
     public class ContactController : ApiController
     {
-        readonly IDistrictService _districtService;
-        public ContactController(IDistrictService districtService)
+        readonly IContactService _contactService;
+        public ContactController(IContactService contactService)
         {
-            _districtService = districtService;
+            _contactService = contactService;
         }
         // GET api/<controller>
-        public IEnumerable<District> Get()
+        public IEnumerable<Contact> Get()
         {
-            return _districtService.GetDistricts();
+            return _contactService.GetContacts();
         }
 
         // GET api/<controller>/5
