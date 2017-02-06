@@ -21,9 +21,10 @@ namespace REX.Core.Services
             {
                 if(order.Contact.Id > 0)
                 {
+                    //update contact separately because we haven't create a function to update all children of the order, but contact have been done.
                     _contactService.UpdateContact(order.Contact);
                     var updatedContact = _contactService.GetContact(order.Contact.Id);
-                    order.Contact = null;
+                    order.Contact = null;//set to null so that the contact/favourite will not be create again in the database (should only the contactId is ok)
                 }
                 dbContext.Orders.Add(order);
                 dbContext.SaveChanges();
@@ -47,7 +48,9 @@ namespace REX.Core.Services
             var res = new Order();
             using (var dbContext = new RexDbContext())
             {
-                res = dbContext.Orders.Where(x => x.Id == id).FirstOrDefault();
+                res = dbContext.Orders.Where(x => x.Id == id)
+                    .Include(y=>y.Contact.Favourites)
+                    .FirstOrDefault();
             }
 
             return res;
@@ -125,7 +128,12 @@ namespace REX.Core.Services
         {
             using (var dbContext = new RexDbContext())
             {
+                //update contact separately because we haven't create a function to update all children of the order, but contact have been done.
+                _contactService.UpdateContact(order.Contact);
+                var updatedContact = _contactService.GetContact(order.Contact.Id);
+               
                 var orderUpdating = dbContext.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
+                orderUpdating.Contact = null;//set to null so that the contact/favourite will not be create again in the database (should only the contactId is ok)
                 dbContext.Entry(orderUpdating).CurrentValues.SetValues(order);
                 dbContext.SaveChanges();
             }

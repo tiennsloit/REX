@@ -27,9 +27,14 @@ namespace REX.API.Controllers
         }
 
         // GET api/<controller>/5
-        public ICollection<Order> GetOrder(int contactId)
+        public ICollection<Order> GetOrders(int contactId)
         {
             return _orderService.GetOrders(contactId);
+        }
+
+        public Order GetOrder(int Id)
+        {
+            return _orderService.GetOrder(Id);
         }
 
         [Route("orderByDefault/{userId}/{contactId}")]
@@ -53,15 +58,18 @@ namespace REX.API.Controllers
         // POST api/<controller>
         public string PostOrder(Order order)
         {
-            //merge favourite
+            //merge favourite: the favourite from client can be a new/existing one come from a new contact/existing contact.
             order.Contact.Favourites = _favouriteService.MergeFavourites(order.Contact.Favourites.FirstOrDefault(), _favouriteService.GetFavourites(order.ContactId));
             _orderService.CreateOrder(order);
             return "true";
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public string PutOrder(Order order)
         {
+            order.Contact.Favourites = _favouriteService.MergeFavourites(order.Contact.Favourites.FirstOrDefault(), _favouriteService.GetFavourites(order.ContactId));
+            _orderService.UpdateOrder(order);
+            return "true";
         }
 
         // DELETE api/<controller>/5
