@@ -39,7 +39,7 @@ namespace REX.Core.Services
             using (var dbContext = new RexDbContext())
             {
                 //todo: filter by isActived property
-                contacts = dbContext.Contacts.ToList();
+                contacts = dbContext.Contacts.Include(s=>s.Favourites).ToList();
             }
 
             return contacts;
