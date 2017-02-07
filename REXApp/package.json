@@ -16,7 +16,9 @@
   "devDependencies": {
     "babel-jest": "18.0.0",
     "babel-preset-react-native": "1.9.1",
+    "immutability-helper": "^2.1.1",
     "jest": "18.1.0",
+    "react-addons-update": "^15.4.2",
     "react-test-renderer": "15.4.2"
   },
   "jest": {

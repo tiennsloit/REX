@@ -21,11 +21,13 @@ class DatePicker extends Component {
       var newState = {};
       const {action, year, month, day} = await DatePickerAndroid.open(options);
       if (action === DatePickerAndroid.dismissedAction) {
-        newState[stateKey + 'Text'] = 'dismissed';
+        newState[stateKey + 'Text'] = this.state.defaultText;
       } else {
+        debugger;
         var date = new Date(year, month, day);
         newState[stateKey + 'Text'] = date.toLocaleDateString();
         newState[stateKey + 'Date'] = date;
+        this.props.onValueChange(date);
       }
       this.setState(newState);
     } catch ({code, message}) {
