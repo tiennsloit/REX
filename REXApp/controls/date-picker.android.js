@@ -40,7 +40,7 @@ class DatePicker extends Component {
             onPress={this.showPicker.bind(this, 'simple', {date: this.state.simpleDate})}>
             <Text style={styles.text}>{this.state.simpleText}</Text>
             </TouchableWithoutFeedback>
-            <Text>{this.props.hellotest}</Text>
+            <Text></Text>
             </View>
         );
     }

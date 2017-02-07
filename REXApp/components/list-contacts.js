@@ -21,14 +21,16 @@ class ListContact extends Component {
         this.state = {
             items: [],
             hasData: false,
-            mainListData: ds.cloneWithRows([])
+            mainListData: ds.cloneWithRows([]),
+            orderNew:null
         }
 
+        this.fetchData();
     }
 
     fetchData() {
 
-        Api.getDrive().then(res => {
+        Api.getContacts().then(res => {
             this.setState({
                 items: res,
                 hasData: true,
@@ -50,12 +52,24 @@ class ListContact extends Component {
         });
     }
 
+    createNewOrder(){
+        Actions.orderDetail({id:0});
+    }
+
     showDetail(contact){
        Actions.contactDetail(contact);
     }
 
     render() {
-
+        if(this.state.items.length == 0)
+        {
+            return (
+                <View>
+                       <Text>Loading...</Text>
+                       <Button onPress={() => this.createNewOrder()} title="New order" />
+                </View>
+            )
+        }
         return (
             <View>
                 <ListView style={styles.container}
@@ -69,8 +83,7 @@ class ListContact extends Component {
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header filterDataFunction={(text) => this.filterData(text)} /> : <Text></Text>}
                     />
-
-                <Button onPress={() => this.fetchData()} title="Fetch data" />
+                <Button onPress={() => this.createNewOrder()} title="New order" />
             </View>
         );
     }

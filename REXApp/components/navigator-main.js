@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import ContactDetail from '../components/contact-detail';
 import ListContact from '../components/list-contacts';
+import OrderDetail from '../components/order-detail';
 import { Scene, Router } from 'react-native-router-flux';
 
 import SceneContactDetail from '../scene/scene-contact-detail';
@@ -28,26 +29,27 @@ class NavigatorMain extends Component {
                     <Scene
                         key="tabBasicInfo"
                         icon={TabIcon}
-                        title="Tin đặt hàng" 
+                        title="Order" 
                         navigationBarStyle={styles.navi}
                         onSelect={() => {
                             Actions.tabInfo({ type: ActionConst.REFRESH });
                         } }
                         >
-                        <Scene key="tabInfo" title="Tin đặt hàng" component={ContactDetail} hideNavBar={false} />
+                        <Scene key="tabInfo" title="Order" component={ContactDetail} hideNavBar={false} />
                     </Scene>
                     <Scene
                         key="tabSummary"
-                        title="Thống kê"
+                        title="Summary"
                         icon={TabIcon}
                         navigationBarStyle={styles.navi}
                         onSelect={() => {
                             Actions.tabSum({ type: ActionConst.REFRESH });
                         } }
                         >
-                        <Scene key="tabSum" title="Thống kê"  component={SceneContactDetail} hideNavBar={false} />
+                        <Scene key="tabSum" title="Summary"  component={SceneContactDetail} hideNavBar={false} />
                     </Scene>
                 </Scene>
+                <Scene key="orderDetail" hideNavBar={true} component={OrderDetail} title="Order detail"/>
             </Scene>
         </Router>
     }
