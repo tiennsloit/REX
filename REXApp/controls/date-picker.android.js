@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Text, View, DatePickerAndroid, TouchableWithoutFeedback,  StyleSheet}  from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, DatePickerAndroid, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 class DatePicker extends Component {
 
-    state = {
+  state = {
     presetDate: new Date(2020, 4, 5),
     allDate: new Date(2020, 4, 5),
-    simpleDate:new Date(),
+    simpleDate: new Date(),
     simpleText: 'pick a date',
     spinnerText: 'pick a date',
     calendarText: 'pick a date',
@@ -36,22 +36,33 @@ class DatePicker extends Component {
   };
 
   render() {
-        return (
-            <View>
-            <TouchableWithoutFeedback
-            onPress={this.showPicker.bind(this, 'simple', {date: this.state.simpleDate})}>
-            <Text style={styles.text}>{this.state.simpleText}</Text>
-            </TouchableWithoutFeedback>
-            <Text></Text>
-            </View>
-        );
-    }
+    return (
+      <View style={styles.row}>
+        <TouchableWithoutFeedback
+          onPress={this.showPicker.bind(this, 'simple', { date: this.state.simpleDate })}>
+          <Text style={styles.label}>{this.state.simpleText}</Text>
+        </TouchableWithoutFeedback>
+        <Text style={styles.input}></Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   text: {
     color: 'black',
+    flex: 1
   },
+  label: {
+    flex: 0.75
+  },
+  row: {
+        
+        paddingLeft: 5
+    },
+  input: {
+    flex: 0.25
+  }
 });
 
 export default DatePicker;
