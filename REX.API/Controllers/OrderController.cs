@@ -27,9 +27,15 @@ namespace REX.API.Controllers
         }
 
         // GET api/<controller>/5
+        [Route("GetOrders/{contactId}")]
         public ICollection<Order> GetOrders(int contactId)
         {
             return _orderService.GetOrders(contactId);
+        }
+        [Route("GetOrdersByContactName/{contactName}")]
+        public ICollection<Order> GetOrders(string contactName)
+        {
+            return _orderService.GetOrders(contactName);
         }
 
         /// <summary>

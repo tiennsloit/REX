@@ -398,6 +398,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".credentials\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

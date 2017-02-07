@@ -71,6 +71,21 @@ namespace REX.Core.Services
             return res;
         }
 
+        public ICollection<Order> GetOrders(string contactName)
+        {
+            var res = new List<Order>();
+            using (var dbContext = new RexDbContext())
+            {
+                res = dbContext.Orders
+                    .Include(e => e.Contact.Favourites.Select(t => t.RiceType))
+                    .Include(e => e.RiceType)
+                    .Include(e => e.User)
+                    .Where(x => x.Contact.Name == contactName).ToList();
+            }
+
+            return res;
+        }
+
         public ICollection<Order> GetOrders()
         {
             var res = new List<Order>();
