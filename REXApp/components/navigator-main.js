@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import ContactDetail from '../components/contact-detail';
 import ListContact from '../components/list-contacts';
+import ListOrders from '../components/list-orders';
 import OrderDetail from '../components/order-detail';
 import { Scene, Router } from 'react-native-router-flux';
 
@@ -20,22 +21,29 @@ import {
 } from 'react-native';
 
 class NavigatorMain extends Component {
+    constructor(props)
+        {
+            super(props);
+           
+             this.state = {
+                 contactId: 0
+             }   
+        }
     render() {
-
         return <Router>
             <Scene key="root">
                 <Scene key="contactList"  hideNavBar={true} component={ListContact} title="List of contacts" />
-                <Scene key="contactDetail"  tabBarStyle={styles.tabBarStyle} tabs={true} hideNavBar={false} title="Contact details">
+                <Scene key="contactDetail"  tabBarStyle={styles.tabBarStyle} tabs={true} hideNavBar={false} title="Contact details" >
                     <Scene
                         key="tabBasicInfo"
                         icon={TabIcon}
-                        title="Order" 
+                        title="Contact" 
                         navigationBarStyle={styles.navi}
-                        onSelect={() => {
+                        onSelect={(props) => {
                             Actions.tabInfo({ type: ActionConst.REFRESH });
                         } }
                         >
-                        <Scene key="tabInfo" title="Order" component={ContactDetail} hideNavBar={false} />
+                        <Scene key="tabInfo" title="Contact" component={ContactDetail} hideNavBar={false} />
                     </Scene>
                     <Scene
                         key="tabSummary"
@@ -47,6 +55,18 @@ class NavigatorMain extends Component {
                         } }
                         >
                         <Scene key="tabSum" title="Summary"  component={SceneContactDetail} hideNavBar={false} />
+                    </Scene>
+                    
+                    <Scene
+                        key="tabOrders"
+                        title="Orders"
+                        icon={TabIcon}
+                        navigationBarStyle={styles.navi}
+                        onSelect={(attr) => {
+                            Actions.tabOrders({contactId:attr.props.id});
+                        } }
+                        >
+                        <Scene key="tabOr" title="Orders"  component={ListOrders} hideNavBar={false} />
                     </Scene>
                 </Scene>
                 <Scene key="orderDetail" hideNavBar={true} component={OrderDetail} title="Order detail"/>

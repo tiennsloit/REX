@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactNative from 'react-native';
-import Api from '../api/api';
 import Header from '../components/list-view-header';
-import { Actions } from 'react-native-router-flux';
-import Icon from '../controls/icon';
+import Api from '../api/api';
 import Loading from '../components/loading';
 import {
     StyleSheet,
@@ -17,22 +14,23 @@ import {
 } from 'react-native';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-class ListContact extends Component {
+class ListOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
             items: [],
             hasData: false,
-            mainListData: ds.cloneWithRows([]),
-            orderNew: null
+            mainListData: ds.cloneWithRows([])
+          
         }
 
         this.fetchData();
+        debugger;
     }
 
     fetchData() {
 
-        Api.getContacts().then(res => {
+        Api.getOrders(this.props.contactId).then(res => {
             this.setState({
                 items: res,
                 hasData: true,
@@ -41,51 +39,21 @@ class ListContact extends Component {
         });
     }
 
-    filterData(text) {
-        var filteredItems = [];
-        if (text != '') {
-            filteredItems = this.state.items.filter((item) => {
-                return item.name.toString().toLowerCase().indexOf(text.toString().toLowerCase()) >= 0 ? true : false;
-            });
-        }
-
-        this.setState({
-            mainListData: ds.cloneWithRows(filteredItems)
-        });
-    }
-
-    createNewOrder() {
-        Actions.orderDetail({ id: 0 });
-    }
-
-    showDetail(contact) {
-        Actions.contactDetail(contact);
-    }
-
     render() {
-       
-        if (this.state.items.length == 0) {
-            return (
-                <View>
-                    <Loading/>
-                    <Button style={styles.newOrderButton} color="grey" onPress={() => this.createNewOrder()} title="New order" />
-                </View>
-            )
-        }
         return (
             <View style={styles.container}>
                 <ListView style={styles.contentContainer}
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) =>
-                        <TouchableHighlight onPress={() => { this.showDetail(rowData) }}>
-                            <Text style={styles.listViewItem}>{rowData.name}</Text>
+                        <TouchableHighlight >
+                            <Text style={styles.listViewItem}>{rowData.dateShipped}</Text>
                         </TouchableHighlight>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}
-                    renderHeader={() => this.state.hasData == true ? <Header filterDataFunction={(text) => this.filterData(text)} /> : <Text></Text>}
+                    renderHeader={() => this.state.hasData == true ? <Header /> : <Text></Text>}
                 />
-                <Button style={styles.newOrderButton} color="grey" onPress={() => this.createNewOrder()} title="New order" />
+                <Button style={styles.newOrderButton} color="grey" title="New order" />
             </View>
         );
     }
@@ -100,11 +68,7 @@ const styles = StyleSheet.create({
         flex: 1,
        
     },
-    loading: {
-        textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom:10
-    },
+    
     contentContainer: {
         flex: 1, // pushes the footer to the end of the screen
         padding: 12,
@@ -138,4 +102,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ListContact;
+export default ListOrders;

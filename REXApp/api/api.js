@@ -5,6 +5,11 @@ var api = {
         return fetch(url).then((res) => res.json());
     },
 
+    getOrders(contactId){
+        var url = 'http://rexwebapi.azurewebsites.net/getOrders/' + contactId;
+        return fetch(url).then((res) => res.json());
+    },
+
     getOrderDefaultNewContact() {
         var url = 'http://rexwebapi.azurewebsites.net/getorderByDefault/2';
         return fetch(url).then((res) => res.json());
