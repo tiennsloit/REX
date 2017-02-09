@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import Api from '../api/api';
 import Header from '../components/list-view-header';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from '../android/app/src/main/assets/fonts/config.json';
+const Icon = createIconSetFromFontello(fontelloConfig);
+
 import {
     StyleSheet,
     Text,
@@ -11,7 +15,7 @@ import {
     Button,
     ListView,
     TouchableHighlight
-    
+
 } from 'react-native';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -22,7 +26,7 @@ class ListContact extends Component {
             items: [],
             hasData: false,
             mainListData: ds.cloneWithRows([]),
-            orderNew:null
+            orderNew: null
         }
 
         this.fetchData();
@@ -52,37 +56,38 @@ class ListContact extends Component {
         });
     }
 
-    createNewOrder(){
-        Actions.orderDetail({id:0});
+    createNewOrder() {
+        Actions.orderDetail({ id: 0 });
     }
 
-    showDetail(contact){
-       Actions.contactDetail(contact);
+    showDetail(contact) {
+        Actions.contactDetail(contact);
     }
 
     render() {
-        if(this.state.items.length == 0)
-        {
+       
+        if (this.state.items.length == 0) {
             return (
                 <View>
-                       <Text>Loading...</Text>
-                       <Button onPress={() => this.createNewOrder()} title="New order" />
+                    <Text>Loading...</Text>
+                    <Button onPress={() => this.createNewOrder()} title="New order" />
                 </View>
             )
         }
         return (
             <View>
+                <Text>Lorem <Icon name="calendar" size={30} /> Ipsum</Text>
                 <ListView style={styles.container}
                     dataSource={this.state.mainListData}
-                    renderRow={(rowData) => 
-                        <TouchableHighlight onPress={()=>{this.showDetail(rowData)}}>
-                        <Text  style={styles.listViewItem}>{rowData.name}</Text>
+                    renderRow={(rowData) =>
+                        <TouchableHighlight onPress={() => { this.showDetail(rowData) }}>
+                            <Text style={styles.listViewItem}>{rowData.name}</Text>
                         </TouchableHighlight>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header filterDataFunction={(text) => this.filterData(text)} /> : <Text></Text>}
-                    />
+                />
                 <Button onPress={() => this.createNewOrder()} title="New order" />
             </View>
         );

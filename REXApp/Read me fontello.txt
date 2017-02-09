@@ -1,0 +1,6 @@
+npm install react-native-vector-icons --save
+Option: Manually
+import { createIconSetFromFontello } from 'react-native-vector-icons';
+import fontelloConfig from './config.json';
+const Icon = createIconSetFromFontello(fontelloConfig);
+copy the fonts needed from fontello to the folder: C:\Projects\REX\REXApp\android\app\src\main\assets\fonts
