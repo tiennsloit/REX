@@ -3,9 +3,6 @@ import ReactNative from 'react-native';
 import Api from '../api/api';
 import Header from '../components/list-view-header';
 import { Actions } from 'react-native-router-flux';
-import { createIconSetFromFontello } from 'react-native-vector-icons';
-import fontelloConfig from '../android/app/src/main/assets/fonts/config.json';
-const Icon = createIconSetFromFontello(fontelloConfig);
 
 import {
     StyleSheet,
@@ -76,7 +73,6 @@ class ListContact extends Component {
         }
         return (
             <View>
-                <Text>Lorem <Icon name="calendar" size={30} /> Ipsum</Text>
                 <ListView style={styles.container}
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) =>

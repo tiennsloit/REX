@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, DatePickerAndroid, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import Icon from '../controls/icon';
 class DatePicker extends Component {
 
   state = {
     presetDate: new Date(2020, 4, 5),
     allDate: new Date(2020, 4, 5),
     simpleDate: new Date(),
-    simpleText: 'pick a date',
+    simpleText: new Date().toLocaleDateString(),
     spinnerText: 'pick a date',
     calendarText: 'pick a date',
     defaultText: 'pick a date',
@@ -38,17 +39,22 @@ class DatePicker extends Component {
   render() {
     return (
       <View style={styles.row}>
-        <TouchableWithoutFeedback
-          onPress={this.showPicker.bind(this, 'simple', { date: this.state.simpleDate })}>
+        <TouchableWithoutFeedback style={styles.label}>
           <Text style={styles.label}>{this.state.simpleText}</Text>
         </TouchableWithoutFeedback>
-        <Text style={styles.input}></Text>
+        <Text style={styles.icon}><Icon name="calendar" size={20} onPress={this.showPicker.bind(this, 'simple', { date: this.state.simpleDate })} /></Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    paddingLeft: 0,
+    paddingTop:35,
+    flex:0.65
+  },
   text: {
     color: 'black',
     flex: 1
@@ -56,12 +62,9 @@ const styles = StyleSheet.create({
   label: {
     flex: 0.75
   },
-  row: {
-        
-        paddingLeft: 5
-    },
-  input: {
-    flex: 0.25
+  icon: {
+    flex: 0.25,
+    textAlign: 'right'
   }
 });
 
