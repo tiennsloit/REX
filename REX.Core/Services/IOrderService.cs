@@ -8,8 +8,8 @@ namespace REX.Core.Services
         Order CreateOrder(Order order);
         void RemoveOrder(int id);
         Order GetOrder(int id);
-        ICollection<Order> GetOrders(int contactId);
-        ICollection<Order> GetOrders(string contactName);
+        ICollection<Order> GetOrders(int contactId, bool include = false);
+        ICollection<Order> GetOrders(string contactName, bool include = false);
         ICollection<Order> GetOrders();
         Order DefaultNewOrder(int userId, int contactId);
         Order DefaultNewOrder(int userId, Contact contact);
