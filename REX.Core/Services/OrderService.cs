@@ -33,12 +33,46 @@ namespace REX.Core.Services
             return order;
         }
 
+        /// <summary>
+        /// Removes the order from database.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public void RemoveOrder(int id)
         {
             using (var dbContext = new RexDbContext())
             {
                 var o = dbContext.Orders.Attach(new Order { Id = id});
                 dbContext.Orders.Remove(o);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Set the delete property to true.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public void DeleteOrder(int id)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var o = dbContext.Orders.Where(x => x.Id == id).FirstOrDefault();
+                o.IsDeleted = true;
+                dbContext.Entry(o).CurrentValues.SetValues(o);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Set the new attribute to true.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public void FinishOrder(int id)
+        {
+            using (var dbContext = new RexDbContext())
+            {
+                var o = dbContext.Orders.Where(x => x.Id == id).FirstOrDefault();
+                o.IsNew = false;
+                dbContext.Entry(o).CurrentValues.SetValues(o);
                 dbContext.SaveChanges();
             }
         }

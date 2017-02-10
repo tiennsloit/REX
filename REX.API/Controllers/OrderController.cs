@@ -103,10 +103,18 @@ namespace REX.API.Controllers
             _orderService.UpdateOrder(order);
             return "true";
         }
+        [Route("FinishOrder/{id}")]
+        public string FinishOrder(int id)
+        {
+            _orderService.FinishOrder(id);
+            return "true";
+        }
 
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+            //just update the delete attribute to true
+            _orderService.DeleteOrder(id);
         }
     }
 }

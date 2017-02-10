@@ -14,5 +14,7 @@ namespace REX.Core.Services
         Order DefaultNewOrder(int userId, int contactId);
         Order DefaultNewOrder(int userId, Contact contact);
         void UpdateOrder(Order order);
+        void DeleteOrder(int id);
+        void FinishOrder(int id);
     }
 }

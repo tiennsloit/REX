@@ -85,5 +85,24 @@ namespace REX.UnitTest
             Assert.AreEqual(null, removedContact);
 
         }
+        [TestMethod]
+        public void TestDeleteOrder()
+        {
+            var users = userService.GetUsers();
+            var contact = contactService.DefaultNewContact();
+            contact.Name = "contact1";
+            var order = orderService.DefaultNewOrder(users.First().Id, contact);
+            var resultCreated = orderService.CreateOrder(order);
+
+            orderService.DeleteOrder(resultCreated.Id);
+
+            var getOrderAgain = orderService.GetOrder(resultCreated.Id);
+            Assert.AreEqual(true, getOrderAgain.IsDeleted);
+
+            orderService.RemoveOrder(getOrderAgain.Id);
+
+            var getAgainOrder = orderService.GetOrder(resultCreated.Id);
+            Assert.AreEqual(null, getAgainOrder);
+        }
     }
 }
