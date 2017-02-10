@@ -21,6 +21,12 @@ var api = {
         return fetch(url).then((res) => res.json());
     },
 
+    deleteOrder()
+    {
+        var url = 'http://rexwebapi.azurewebsites.net/api/list';
+        return fetch(url).then((res) => res.json());
+    }
+
     saveOrder(order) {
         
         var url = 'http://rexwebapi.azurewebsites.net/api/order/postorder';

@@ -3,7 +3,7 @@ import ReactNative from 'react-native';
 import Api from '../api/api';
 import Header from '../components/list-view-header';
 import { Actions } from 'react-native-router-flux';
-import Icon from '../controls/icon';
+
 import Loading from '../components/loading';
 import {
     StyleSheet,
@@ -100,11 +100,7 @@ const styles = StyleSheet.create({
         flex: 1,
        
     },
-    loading: {
-        textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom:10
-    },
+    
     contentContainer: {
         flex: 1, // pushes the footer to the end of the screen
         padding: 12,

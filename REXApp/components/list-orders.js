@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Header from '../components/list-view-header';
 import Api from '../api/api';
 import Loading from '../components/loading';
-import Moment from 'moment';
+import ListOrdersItem from '../components/list-orders-item';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import {
     StyleSheet,
     Text,
@@ -29,7 +30,6 @@ class ListOrders extends Component {
     }
 
     fetchData() {
-        debugger;
         Api.getOrders(this.props.id).then(res => {
             this.setState({
                 items: res,
@@ -39,19 +39,29 @@ class ListOrders extends Component {
         });
     }
 
+    deleteOrder(order){
+        debugger;
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <ListView style={styles.contentContainer}
+                <SwipeListView style={styles.contentContainer}
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) =>
-                        <TouchableHighlight >
-                            <Text style={styles.listViewItem}>{Moment(rowData.dateShipped).format('DD-MM-YYYY')}</Text>
-                        </TouchableHighlight>
+                        <View style={styles.rowFront}><ListOrdersItem rowData={rowData}/></View>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header /> : <Text></Text>}
+                    renderHiddenRow={ data => (
+                <View style={styles.rowBack}>
+                    <Text onPress={(order)=>this.deleteOrder(data)}>Delete</Text>
+                    <Text onPress={(order)=>this.deleteOrder(data)}>Delete</Text>
+                </View>
+            )}
+            leftOpenValue={75}
+            rightOpenValue={-75}
                 />
                 <Button style={styles.newOrderButton} color="grey" title="New order" />
             </View>
@@ -71,7 +81,7 @@ const styles = StyleSheet.create({
     
     contentContainer: {
         flex: 1, // pushes the footer to the end of the screen
-        padding: 12,
+        padding: 0,
     },
     welcome: {
         fontSize: 20,
@@ -92,14 +102,24 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingTop: 10
     },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-    newOrderButton: {
-        height:100
-    }
+    
+    rowFront: {
+		alignItems: 'center',
+		backgroundColor: 'white',
+		borderBottomColor: 'black',
+		borderBottomWidth: 1,
+		justifyContent: 'center',
+		height: 50,
+	},
+	rowBack: {
+		alignItems: 'center',
+		backgroundColor: 'red',
+        color:'white',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingLeft: 12,
+	}
 });
 
 export default ListOrders;
