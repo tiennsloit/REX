@@ -6,6 +6,7 @@ var api = {
     },
 
     getOrders(contactId){
+        debugger;
         var url = 'http://rexwebapi.azurewebsites.net/getOrders/' + contactId;
         return fetch(url).then((res) => res.json());
     },

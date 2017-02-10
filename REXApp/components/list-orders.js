@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../components/list-view-header';
 import Api from '../api/api';
 import Loading from '../components/loading';
+import Moment from 'moment';
 import {
     StyleSheet,
     Text,
@@ -25,12 +26,11 @@ class ListOrders extends Component {
         }
 
         this.fetchData();
-        debugger;
     }
 
     fetchData() {
-
-        Api.getOrders(this.props.contactId).then(res => {
+        debugger;
+        Api.getOrders(this.props.id).then(res => {
             this.setState({
                 items: res,
                 hasData: true,
@@ -46,7 +46,7 @@ class ListOrders extends Component {
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) =>
                         <TouchableHighlight >
-                            <Text style={styles.listViewItem}>{rowData.dateShipped}</Text>
+                            <Text style={styles.listViewItem}>{Moment(rowData.dateShipped).format('DD-MM-YYYY')}</Text>
                         </TouchableHighlight>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}

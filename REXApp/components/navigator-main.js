@@ -25,9 +25,6 @@ class NavigatorMain extends Component {
         {
             super(props);
            
-             this.state = {
-                 contactId: 0
-             }   
         }
     render() {
         return <Router>
@@ -63,7 +60,7 @@ class NavigatorMain extends Component {
                         icon={TabIcon}
                         navigationBarStyle={styles.navi}
                         onSelect={(attr) => {
-                            Actions.tabOrders({contactId:attr.props.id});
+                            Actions.tabOrders(attr.props.id);
                         } }
                         >
                         <Scene key="tabOr" title="Orders"  component={ListOrders} hideNavBar={false} />
