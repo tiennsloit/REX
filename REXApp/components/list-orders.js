@@ -4,6 +4,7 @@ import Api from '../api/api';
 import Loading from '../components/loading';
 import ListOrdersItem from '../components/list-orders-item';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import Icon from '../controls/icon';
 import {
     StyleSheet,
     Text,
@@ -40,7 +41,15 @@ class ListOrders extends Component {
     }
 
     deleteOrder(order){
-        debugger;
+        Api.deleteOrder(order.id).then(()=>{
+            this.fetchData();
+        });
+    }
+
+    finishOrder(order){
+        Api.finishOrder(order.id).then(()=>{
+            this.fetchData();
+        });
     }
 
     render() {
@@ -56,12 +65,12 @@ class ListOrders extends Component {
                     renderHeader={() => this.state.hasData == true ? <Header /> : <Text></Text>}
                     renderHiddenRow={ data => (
                 <View style={styles.rowBack}>
-                    <Text onPress={(order)=>this.deleteOrder(data)}>Delete</Text>
-                    <Text onPress={(order)=>this.deleteOrder(data)}>Delete</Text>
+                    <Text onPress={(order)=>this.finishOrder(data)}><Icon name="ok" color="white" size={20}/></Text>
+                    <Text onPress={(order)=>this.deleteOrder(data)}><Icon name="trash-empty" color="white" size={20}/></Text>
                 </View>
             )}
-            leftOpenValue={75}
-            rightOpenValue={-75}
+            leftOpenValue={50}
+            rightOpenValue={-50}
                 />
                 <Button style={styles.newOrderButton} color="grey" title="New order" />
             </View>
@@ -119,6 +128,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		paddingLeft: 12,
+        paddingRight:12
 	}
 });
 

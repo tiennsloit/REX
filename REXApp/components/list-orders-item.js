@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
+import Icon from '../controls/icon';
 
 import {
     StyleSheet,
@@ -14,14 +15,21 @@ import {
 
 class ListOrdersItem extends Component {
     render() {
-        return (
-           
+        if (this.props.rowData.isNew) {
+            return (
                 <TouchableHighlight >
-                            <Text>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}</Text>
+                    <Text>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}  <Icon name="edit" size={15}/></Text>
                 </TouchableHighlight>
-           
-            
-        );
+            );
+        }
+        else {
+            return (
+                <TouchableHighlight >
+                    <Text>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')} <Icon name="ok" size={20}/></Text>
+                </TouchableHighlight>
+            );
+        }
+
     }
 }
 
@@ -32,6 +40,10 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         fontSize: 16,
         paddingTop: 10
+    },
+    newOrder:{
+        backgroundColor:'blue',
+        color:'white'
     }
 });
 

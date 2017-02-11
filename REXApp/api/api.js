@@ -21,16 +21,26 @@ var api = {
         return fetch(url).then((res) => res.json());
     },
 
-    deleteOrder()
+    deleteOrder(id)
     {
-        var url = 'http://rexwebapi.azurewebsites.net/api/list';
-        return fetch(url).then((res) => res.json());
-    }
+        var url = 'http://rexwebapi.azurewebsites.net/api/order/' + id;
+        return fetch(url, {
+            method: 'DELETE'
+        }).then((res) => res.json());
+    },
+    finishOrder(id)
+    {
+        var url = 'http://rexwebapi.azurewebsites.net/finishOrder/' + id;
+        return fetch(url, {
+            method: 'PUT'
+        }).then((res) => {
+        });
+    },
 
     saveOrder(order) {
         
         var url = 'http://rexwebapi.azurewebsites.net/api/order/postorder';
-        fetch(url, {
+        return fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

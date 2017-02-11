@@ -63,7 +63,7 @@ class NavigatorMain extends Component {
                             Actions.tabOrders(attr.props.id);
                         } }
                         >
-                        <Scene key="tabOr" title="Orders"  component={ListOrders} hideNavBar={false} />
+                        <Scene key="tabOr" title="Orders"  component={ListOrders} hideNavBar={true} />
                     </Scene>
                 </Scene>
                 <Scene key="orderDetail" hideNavBar={true} component={OrderDetail} title="Order detail"/>
