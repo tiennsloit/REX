@@ -103,7 +103,9 @@ namespace REX.API.Controllers
             _orderService.UpdateOrder(order);
             return "true";
         }
+
         [Route("FinishOrder/{id}")]
+        [HttpPut]
         public string FinishOrder(int id)
         {
             _orderService.FinishOrder(id);
