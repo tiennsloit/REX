@@ -40,16 +40,23 @@ class ListOrders extends Component {
         });
     }
 
-    deleteOrder(order){
+    deleteOrder(order, secId, rowId, rowMap){
+        this.removeItemList(secId, rowId, rowMap);
         Api.deleteOrder(order.id).then(()=>{
             this.fetchData();
         });
     }
 
-    finishOrder(order){
+    finishOrder(order, secId, rowId, rowMap){
+        this.removeItemList(secId, rowId, rowMap);
         Api.finishOrder(order.id).then(()=>{
             this.fetchData();
         });
+    }
+
+    removeItemList(secId, rowId, rowMap){
+        debugger;
+        rowMap[`${secId}${rowId}`].closeRow();
     }
 
     render() {
@@ -63,10 +70,10 @@ class ListOrders extends Component {
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header /> : <Text></Text>}
-                    renderHiddenRow={ data => (
+                    renderHiddenRow={ (data, secId, rowId, rowMap) => (
                 <View style={styles.rowBack}>
-                    <Text onPress={(order)=>this.finishOrder(data)}><Icon name="ok" color="white" size={20}/></Text>
-                    <Text onPress={(order)=>this.deleteOrder(data)}><Icon name="trash-empty" color="white" size={20}/></Text>
+                    <Text onPress={(order)=>this.finishOrder(data, secId, rowId, rowMap)}><Icon name="ok" color="white" size={20}/></Text>
+                    <Text onPress={(order)=>this.deleteOrder(data, secId, rowId, rowMap)}><Icon name="trash-empty" color="white" size={20}/></Text>
                 </View>
             )}
             leftOpenValue={50}
