@@ -101,11 +101,11 @@ namespace REX.Core.Services
                     .Include(e => e.Contact.Favourites.Select(t => t.RiceType))
                     .Include(e => e.RiceType)
                     .Include(e => e.User)
-                    .Where(x => x.ContactId == contactId && x.IsNew == true && x.IsDeleted == false).ToList();
+                    .Where(x => x.ContactId == contactId && x.IsDeleted == false).ToList();
                 }
                 else {
                     res = dbContext.Orders
-                    .Where(x => x.ContactId == contactId && x.IsNew == true && x.IsDeleted == false).ToList();
+                    .Where(x => x.ContactId == contactId && x.IsDeleted == false).ToList();
                 }
             }
 
@@ -123,12 +123,12 @@ namespace REX.Core.Services
                                         .Include(e => e.Contact.Favourites.Select(t => t.RiceType))
                                         .Include(e => e.RiceType)
                                         .Include(e => e.User)
-                                        .Where(x => x.Contact.Name == contactName && x.IsNew == true && x.IsDeleted == false).ToList();
+                                        .Where(x => x.Contact.Name == contactName && x.IsDeleted == false).ToList();
                 }
                 else
                 {
                     res = dbContext.Orders
-                                        .Where(x => x.Contact.Name == contactName && x.IsNew == true && x.IsDeleted == false).ToList();
+                                        .Where(x => x.Contact.Name == contactName && x.IsDeleted == false).ToList();
                 }
                 
             }
