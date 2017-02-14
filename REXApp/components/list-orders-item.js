@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
 import Icon from '../controls/icon';
+import { Actions, ActionConst } from 'react-native-router-flux';
+import Api from '../api/api';
 
 import {
     StyleSheet,
@@ -14,18 +16,31 @@ import {
 
 
 class ListOrdersItem extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    editOrder(id, contactId) {
+        Actions.orderDetail({
+            id: 6, dataFunction: () => { return Api.getOrder(id); }, routeSaveFunction: () => {
+               Actions.pop();
+            }
+        }); 
+
+    }
+
     render() {
         if (this.props.rowData.isNew) {
             return (
                 <TouchableHighlight >
-                    <Text>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}  <Icon name="edit" size={15}/></Text>
+                    <Text onPress={() => this.editOrder(this.props.rowData.id, this.props.rowData.contactId)}>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}  <Icon name="edit" size={15} /></Text>
                 </TouchableHighlight>
             );
         }
         else {
             return (
                 <TouchableHighlight >
-                    <Text>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')} <Icon name="ok" size={20}/></Text>
+                    <Text onPress={() => this.editOrder(this.props.rowData.id, this.props.rowData.contactId)}>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')} <Icon name="ok" size={20} /></Text>
                 </TouchableHighlight>
             );
         }
@@ -41,9 +56,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingTop: 10
     },
-    newOrder:{
-        backgroundColor:'blue',
-        color:'white'
+    newOrder: {
+        backgroundColor: 'blue',
+        color: 'white'
     }
 });
 

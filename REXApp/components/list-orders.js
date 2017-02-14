@@ -26,7 +26,6 @@ class ListOrders extends Component {
             mainListData: ds.cloneWithRows([])
           
         }
-
         this.fetchData();
     }
 
@@ -55,9 +54,10 @@ class ListOrders extends Component {
     }
 
     removeItemList(secId, rowId, rowMap){
-        debugger;
         rowMap[`${secId}${rowId}`].closeRow();
     }
+
+    
 
     render() {
         return (
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-       
+       marginBottom:50
     },
     
     contentContainer: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, View, Text, TextInput, Picker, Navigator, ScrollView, Linking, StyleSheet, TouchableOpacity } from 'react-native';
 import Api from '../api/api';
 import DatePicker from '../controls/date-picker.android';
-import {Actions} from 'react-native-router-flux';
+import {Actions, ActionConst} from 'react-native-router-flux';
 import update from 'immutability-helper';
 var PickerItem = Picker.Item;
 
@@ -13,19 +13,19 @@ class OrderDetail extends Component {
             order: null,
         }
 
-        this.GetNewOrder();
-        this.GetListItems();
+        this.getOrderFunction();
+        this.getListItems();
     }
 
-    GetNewOrder() {
-        Api.getOrderDefaultNewContact().then((res) => {
+    getOrderFunction() {
+        this.props.dataFunction().then((res) => {
             this.setState({
                 order: res
             });
         })
     }
 
-    GetListItems() {
+    getListItems() {
         Api.getAllListItems().then((res) => {
            
             this.setState({
@@ -38,8 +38,8 @@ class OrderDetail extends Component {
     }
 
     saveOrder() {
-        Api.saveOrder(this.state.order);
-        Actions.contactList();
+        //Api.saveOrder(this.state.order);
+        this.props.routeSaveFunction();
     }
 
     updateText(target)
@@ -50,8 +50,8 @@ class OrderDetail extends Component {
     render() {
         if (this.state.order != null) {
             return (
-                <View>
-                    <ScrollView>
+                <View style={styles.detail}>
+                    <ScrollView >
                         <View style={styles.row}>
                             <Text style={styles.label}>Contact name:</Text>
                             <TextInput style={styles.input} value={this.state.order.contact.name} onChangeText={(value)=>this.updateText({order:{contact:{name:{$set:value}}}})} />
@@ -188,7 +188,8 @@ class OrderDetail extends Component {
 
 const styles = StyleSheet.create({
     detail: {
-        paddingTop: 60
+        
+        marginBottom:50
     },
     row: {
         flexDirection: 'row',

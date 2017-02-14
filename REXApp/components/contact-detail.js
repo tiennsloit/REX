@@ -29,7 +29,8 @@ class ContactDetail extends Component {
   }
 
   render() {
-
+    if(!this.props)
+    return (<View></View>)
     return (
       <View >
         <ScrollView style={styles.detail}>

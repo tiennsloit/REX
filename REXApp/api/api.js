@@ -11,6 +11,12 @@ var api = {
         return fetch(url).then((res) => res.json());
     },
 
+    getOrder(id){
+        debugger;
+        var url = 'http://rexwebapi.azurewebsites.net/api/order/' + id;
+        return fetch(url).then((res) => res.json());
+    },
+
     getOrderDefaultNewContact() {
         var url = 'http://rexwebapi.azurewebsites.net/getorderByDefault/2';
         return fetch(url).then((res) => res.json());
