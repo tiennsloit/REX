@@ -109,7 +109,7 @@ namespace REX.Core.Services
                 }
             }
 
-            return res;
+            return res.OrderByDescending(e=>e.IsNew).OrderByDescending(e=>e.DateModified).ToList();
         }
 
         public ICollection<Order> GetOrders(string contactName, bool include = false)
@@ -133,7 +133,7 @@ namespace REX.Core.Services
                 
             }
 
-            return res;
+            return res.OrderByDescending(e => e.IsNew).OrderByDescending(e => e.DateModified).ToList();
         }
 
         public ICollection<Order> GetOrders()
