@@ -43,11 +43,24 @@ var api = {
         });
     },
 
-    saveOrder(order) {
+    createOrder(order) {
         
         var url = 'http://rexwebapi.azurewebsites.net/api/order/postorder';
         return fetch(url, {
             method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order)
+        });
+    },
+    
+    updateOrder(order) {
+        
+        var url = 'http://rexwebapi.azurewebsites.net/api/order/putOrder';
+        return fetch(url, {
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

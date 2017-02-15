@@ -19,8 +19,9 @@ class OrderDetail extends Component {
 
     getOrderFunction() {
         this.props.dataFunction().then((res) => {
+            debugger;
             this.setState({
-                order: res
+                order: res,
             });
         })
     }
@@ -38,7 +39,15 @@ class OrderDetail extends Component {
     }
 
     saveOrder() {
-        //Api.saveOrder(this.state.order);
+       if(this.state.order.id > 0)
+       {
+              Api.updateOrder(this.state.order);
+       }
+       else
+       {
+           Api.createOrder(this.state.order);
+       }
+        
         this.props.routeSaveFunction();
     }
 
@@ -53,24 +62,28 @@ class OrderDetail extends Component {
                 <View style={styles.detail}>
                     <ScrollView >
                         <View style={styles.row}>
+                            <Text style={styles.label}>Id:</Text>
+                            <Text style={styles.labelNext}>{this.state.order.id}</Text>
+                        </View>
+                        <View style={styles.row}>
                             <Text style={styles.label}>Contact name:</Text>
-                            <TextInput style={styles.input} value={this.state.order.contact.name} onChangeText={(value)=>this.updateText({order:{contact:{name:{$set:value}}}})} />
+                            <TextInput editable={this.props.contactEditable} style={styles.input} value={this.state.order.contact.name} onChangeText={(value)=>this.updateText({order:{contact:{name:{$set:value}}}})} />
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Facebook name:</Text>
-                            <TextInput style={styles.input} value={this.state.order.contact.faceBookName} onChangeText={(value)=>this.updateText({order:{contact:{faceBookName:{$set:value}}}})}/>
+                            <TextInput editable={this.props.contactEditable} style={styles.input} value={this.state.order.contact.faceBookName} onChangeText={(value)=>this.updateText({order:{contact:{faceBookName:{$set:value}}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Phone 1:</Text>
-                            <TextInput keyboardType="phone-pad"  style={styles.input} value={this.state.order.contact.phone1} onChangeText={(value)=>this.updateText({order:{contact:{phone1:{$set:value}}}})}/>
+                            <TextInput editable={this.props.contactEditable} keyboardType="phone-pad"  style={styles.input} value={this.state.order.contact.phone1} onChangeText={(value)=>this.updateText({order:{contact:{phone1:{$set:value}}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Phone 2:</Text>
-                            <TextInput keyboardType="phone-pad" style={styles.input} value={this.state.order.contact.phone2} onChangeText={(value)=>this.updateText({order:{contact:{phone2:{$set:value}}}})}/>
+                            <TextInput editable={this.props.contactEditable} keyboardType="phone-pad" style={styles.input} value={this.state.order.contact.phone2} onChangeText={(value)=>this.updateText({order:{contact:{phone2:{$set:value}}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Address:</Text>
-                            <TextInput style={styles.input} value={this.state.order.contact.address} onChangeText={(value)=>this.updateText({order:{contact:{address:{$set:value}}}})}/>
+                            <TextInput editable={this.props.contactEditable} style={styles.input} value={this.state.order.contact.address} onChangeText={(value)=>this.updateText({order:{contact:{address:{$set:value}}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>District:</Text>
@@ -123,47 +136,47 @@ class OrderDetail extends Component {
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Price:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.price} onChangeText={(value) => this.updateText({order:{price:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric"  style={styles.input} value={this.state.order.price.toString()} onChangeText={(value) => this.updateText({order:{price:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Surcharge:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.surcharge} onChangeText={(value) => this.updateText({order:{surcharge:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.surcharge.toString()} onChangeText={(value) => this.updateText({order:{surcharge:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Amount To Receive:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.amountToReceived} onChangeText={(value) => this.updateText({order:{amountToReceived:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.amountToReceived.toString()} onChangeText={(value) => this.updateText({order:{amountToReceived:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Cover price:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.coverPrice} onChangeText={(value) => this.updateText({order:{coverPrice:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.coverPrice.toString()} onChangeText={(value) => this.updateText({order:{coverPrice:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Promo price:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.promoPrice} onChangeText={(value) => this.updateText({order:{promoPrice:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.promoPrice.toString()} onChangeText={(value) => this.updateText({order:{promoPrice:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Total Price:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.totalPrice} onChangeText={(value) => this.updateText({order:{totalPrice:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.totalPrice.toString()} onChangeText={(value) => this.updateText({order:{totalPrice:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Ship Fee:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.shipFee} onChangeText={(value) => this.updateText({order:{shipFee:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.shipFee.toString()} onChangeText={(value) => this.updateText({order:{shipFee:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Other Fee:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.otherFee} onChangeText={(value) => this.updateText({order:{otherFee:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.otherFee.toString()} onChangeText={(value) => this.updateText({order:{otherFee:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Profit:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.profit} onChangeText={(value) => this.updateText({order:{profit:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.profit.toString()} onChangeText={(value) => this.updateText({order:{profit:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Paid:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.paid} onChangeText={(value) => this.updateText({order:{paid:{$set:value}}})} />
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.paid.toString()} onChangeText={(value) => this.updateText({order:{paid:{$set:value}}})} />
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Received:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.received} onChangeText={(value) => this.updateText({order:{received:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.received.toString()} onChangeText={(value) => this.updateText({order:{received:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>IsNew:</Text>
@@ -209,6 +222,10 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 0.65
+    },
+    labelNext: {
+        flex: 0.65,
+        paddingTop:35
     },
     inputPicker: {
         flex: 0.65,

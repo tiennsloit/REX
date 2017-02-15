@@ -66,7 +66,7 @@ class ListContact extends Component {
        
         if (this.state.items.length == 0) {
             return (
-                <View>
+                <View style={styles.container}>
                     <Loading/>
                     <Button style={styles.newOrderButton} color="grey" onPress={() => this.createNewOrder()} title="New order" />
                 </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-       
+       paddingTop:50
     },
     
     contentContainer: {

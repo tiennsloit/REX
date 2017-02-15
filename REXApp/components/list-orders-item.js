@@ -21,8 +21,8 @@ class ListOrdersItem extends Component {
     }
 
     editOrder(id, contactId) {
-        Actions.orderDetail({
-            id: 6, dataFunction: () => { return Api.getOrder(id); }, routeSaveFunction: () => {
+        Actions.orderDetail({contactEditable:false,
+            dataFunction: () => { return Api.getOrder(id); }, routeSaveFunction: () => {
                Actions.pop();
             }
         }); 
@@ -33,7 +33,7 @@ class ListOrdersItem extends Component {
         if (this.props.rowData.isNew) {
             return (
                 <TouchableHighlight >
-                    <Text onPress={() => this.editOrder(this.props.rowData.id, this.props.rowData.contactId)}>{Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}  <Icon name="edit" size={15} /></Text>
+                    <Text onPress={() => this.editOrder(this.props.rowData.id, this.props.rowData.contactId)}>ship at: {Moment(this.props.rowData.dateShipped).format('DD-MM-YYYY')}  <Icon name="edit" size={15} /></Text>
                 </TouchableHighlight>
             );
         }
