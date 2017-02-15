@@ -199,6 +199,7 @@ namespace REX.Core.Services
                
                 var orderUpdating = dbContext.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
                 orderUpdating.Contact = null;//set to null so that the contact/favourite will not be create again in the database (should only the contactId is ok)
+                orderUpdating.DateModified = DateTime.Now;
                 dbContext.Entry(orderUpdating).CurrentValues.SetValues(order);
                 dbContext.SaveChanges();
             }
