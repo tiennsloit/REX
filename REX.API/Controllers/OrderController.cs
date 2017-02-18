@@ -83,6 +83,7 @@ namespace REX.API.Controllers
             }
              
             var defaultOrder = _orderService.DefaultNewOrder(userId, contact);
+            defaultOrder.ContactId = contact.Id;
 
             return defaultOrder;
         }
