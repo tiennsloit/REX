@@ -55,7 +55,13 @@ class ListContact extends Component {
     }
 
     createNewOrder() {
-        Actions.orderDetail({ id: 0, dataFunction:()=>{ return Api.getOrderDefaultNewContact();} , routeSaveFunction:()=>{ Actions.contactList();}});
+        Actions.orderDetail({
+            contactEditable:true,
+            dataFunction: () => { return Api.getOrderDefaultNewContact(); }, routeSaveFunction: () => {
+               Actions.pop();
+            }
+        });
+        // Actions.orderDetail({ id: 0, dataFunction:()=>{ return Api.getOrderDefaultNewContact();} , routeSaveFunction:()=>{ Actions.contactList();}});
     }
 
     showDetail(contact) {

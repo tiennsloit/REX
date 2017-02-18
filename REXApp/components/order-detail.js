@@ -12,7 +12,7 @@ class OrderDetail extends Component {
         this.state = {
             order: null,
         }
-
+        debugger;
         this.getOrderFunction();
         this.getListItems();
     }
@@ -39,6 +39,7 @@ class OrderDetail extends Component {
     }
 
     saveOrder() {
+        debugger;
        if(this.state.order.id > 0)
        {
               Api.updateOrder(this.state.order);

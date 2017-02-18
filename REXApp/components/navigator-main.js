@@ -44,17 +44,17 @@ class NavigatorMain extends Component {
                         title="Orders"
                         icon={TabIcon}
                         navigationBarStyle={styles.navi}
-                        
+                        hideNavBar={false}
                         onSelect={(attr) => {
                             debugger;
                             Actions.tabOrders(attr.props.id);
                         } }
                         >
-                        <Scene key="tabOrs" title="Orders"  component={ListOrders} hideNavBar={true}>
+                        <Scene key="tabOrs" title="Orders"  component={ListOrders} hideNavBar={false}>
                               
                         </Scene>
-                        <Scene key="orderDetail" title="OD"  hideNavBar={true} >
-                            <Scene key="od" title="Order Detail"  component={OrderDetail} hideNavBar={true} />
+                        <Scene key="orderDetail" title="OD"  hideNavBar={false} >
+                            <Scene key="od" title="Order Detail"  component={OrderDetail} hideNavBar={false} />
                         </Scene>  
                     </Scene>
                     <Scene

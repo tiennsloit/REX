@@ -5,6 +5,7 @@ import Loading from '../components/loading';
 import ListOrdersItem from '../components/list-orders-item';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Icon from '../controls/icon';
+import { Actions } from 'react-native-router-flux';
 import {
     StyleSheet,
     Text,
@@ -57,7 +58,16 @@ class ListOrders extends Component {
         rowMap[`${secId}${rowId}`].closeRow();
     }
 
-    
+    newOrder(contactId)
+    {
+      
+        Actions.orderDetail({
+            contactEditable:true,
+            dataFunction: () => { return Api.getOrderDefaultExistingContact(contactId); }, routeSaveFunction: () => {
+               Actions.pop();
+            }
+        });
+    }
 
     render() {
         return (
@@ -79,7 +89,7 @@ class ListOrders extends Component {
             leftOpenValue={50}
             rightOpenValue={-50}
                 />
-                <Button style={styles.newOrderButton} color="grey" title="New order" />
+                <Button style={styles.newOrderButton} color="grey" title="New order" onPress={()=>this.newOrder(this.props.id)} />
             </View>
         );
     }
@@ -93,11 +103,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
        marginBottom:50
+        
     },
     
     contentContainer: {
         flex: 1, // pushes the footer to the end of the screen
-        padding: 0,
+        marginTop:60,
+        padding:10
     },
     welcome: {
         fontSize: 20,
