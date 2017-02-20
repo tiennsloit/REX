@@ -12,14 +12,14 @@ class OrderDetail extends Component {
         this.state = {
             order: null,
         }
-        debugger;
+       
         this.getOrderFunction();
         this.getListItems();
     }
 
     getOrderFunction() {
         this.props.dataFunction().then((res) => {
-            debugger;
+           
             this.setState({
                 order: res,
             });
@@ -39,17 +39,20 @@ class OrderDetail extends Component {
     }
 
     saveOrder() {
-        debugger;
+      
        if(this.state.order.id > 0)
        {
-              Api.updateOrder(this.state.order);
+              Api.updateOrder(this.state.order).then(()=> {
+                  this.props.routeSaveFunction();
+              });
        }
        else
        {
-           Api.createOrder(this.state.order);
+           Api.createOrder(this.state.order).then(()=> {
+                  this.props.routeSaveFunction();
+              });
        }
         
-        this.props.routeSaveFunction();
     }
 
     updateText(target)

@@ -27,6 +27,7 @@ class ListOrders extends Component {
             mainListData: ds.cloneWithRows([])
           
         }
+        debugger;
         this.fetchData();
     }
 
@@ -64,7 +65,8 @@ class ListOrders extends Component {
         Actions.orderDetail({
             contactEditable:true,
             dataFunction: () => { return Api.getOrderDefaultExistingContact(contactId); }, routeSaveFunction: () => {
-               Actions.pop();
+               Actions.tabOrs({type:"reset", id:contactId});
+               
             }
         });
     }

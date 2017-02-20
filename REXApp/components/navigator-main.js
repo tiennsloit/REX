@@ -11,6 +11,7 @@ import SceneMain from '../scene/scene-main';
 
 import TabIcon from '../components/tab-icon';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import { PUSH_ACTION, RESET_ACTION, REFRESH_ACTION } from 'react-native-router-flux/src/Actions';
 import {
     StyleSheet,
     View,
@@ -46,11 +47,10 @@ class NavigatorMain extends Component {
                         navigationBarStyle={styles.navi}
                         hideNavBar={false}
                         onSelect={(attr) => {
-                            debugger;
-                            Actions.tabOrders(attr.props.id);
+                            Actions.tabOrders({type:ActionConst.REFRESH});
                         } }
                         >
-                        <Scene key="tabOrs" title="Orders"  component={ListOrders} hideNavBar={false}>
+                        <Scene key="tabOrs" title="Orders"  component={ListOrders} hideNavBar={false} >
                               
                         </Scene>
                         <Scene key="orderDetail" title="OD"  hideNavBar={false} >
