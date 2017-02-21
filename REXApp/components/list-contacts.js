@@ -91,7 +91,7 @@ class ListContact extends Component {
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header filterDataFunction={(text) => this.filterData(text)} /> : <Text></Text>}
                 />
-                <Button style={styles.newOrderButton} color="grey" onPress={() => this.createNewOrder()} title="New order" />
+                <Button style={styles.newOrderButton} color="darkorange" onPress={() => this.createNewOrder()} title="New order" />
             </View>
         );
     }

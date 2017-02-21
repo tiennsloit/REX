@@ -64,7 +64,7 @@ class OrderDetail extends Component {
         if (this.state.order != null) {
             return (
                 <View style={styles.detail}>
-                    <ScrollView >
+                    <ScrollView style={styles.container}>
                         <View style={styles.row}>
                             <Text style={styles.label}>Id:</Text>
                             <Text style={styles.labelNext}>{this.state.order.id}</Text>
@@ -186,8 +186,9 @@ class OrderDetail extends Component {
                             <Text style={styles.label}>IsNew:</Text>
                             <Text style={styles.input}>{this.state.order.isNew}</Text>
                         </View>
-                        <Button onPress={() => this.saveOrder()} title="Save Order" />
+                        
                     </ScrollView>
+                    <Button color="darkorange" onPress={() => this.saveOrder()} title="Save Order" />
                 </View>
             );
         }
@@ -205,8 +206,12 @@ class OrderDetail extends Component {
 
 const styles = StyleSheet.create({
     detail: {
-        
+        flex: 1,
         marginBottom:50
+    },
+    container:{
+         flex: 1//push the button to the end of the screen
+      
     },
     row: {
         flexDirection: 'row',

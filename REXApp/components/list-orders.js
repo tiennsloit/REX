@@ -63,7 +63,7 @@ class ListOrders extends Component {
     {
       
         Actions.orderDetail({
-            contactEditable:true,
+            contactEditable:false,
             dataFunction: () => { return Api.getOrderDefaultExistingContact(contactId); }, routeSaveFunction: () => {
                Actions.tabOrs({type:"reset", id:contactId});
                
@@ -91,7 +91,8 @@ class ListOrders extends Component {
             leftOpenValue={50}
             rightOpenValue={-50}
                 />
-                <Button style={styles.newOrderButton} color="grey" title="New order" onPress={()=>this.newOrder(this.props.id)} />
+                <Icon.Button style={styles.newOrderButton} name="floppy"  onPress={()=>this.newOrder(this.props.id)} >NEW ORDER</Icon.Button>
+                    
             </View>
         );
     }
@@ -106,6 +107,13 @@ const styles = StyleSheet.create({
         flex: 1,
        marginBottom:50
         
+    },
+
+    newOrderButton:{
+        color:"white",
+        backgroundColor:"darkorange",
+        borderRadius:0,
+        justifyContent: 'center'
     },
     
     contentContainer: {

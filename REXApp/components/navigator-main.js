@@ -21,51 +21,56 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-const reducerCreate = params=>{
+const reducerCreate = params => {
     const defaultReducer = Reducer(params);
-    return (state, action)=>{
+    return (state, action) => {
         console.log("ACTION:", action);
         return defaultReducer(state, action);
     }
 };
 
 class NavigatorMain extends Component {
-    constructor(props)
-        {
-            super(props);
-           
-        }
+    constructor(props) {
+        super(props);
+
+    }
     render() {
         return <Router createReducer={reducerCreate} >
             <Scene key="root"  >
-                <Scene key="contactList"  hideNavBar={false} component={ListContact} title="List of contacts" />
-                <Scene key="contactDetail" tabBarStyle={styles.tabBarStyle} tabs={true} hideNavBar={false} title="Contact details" >
+                <Scene key="contactList" hideNavBar={false} titleStyle={styles.navTitle} navigationBarStyle={styles.navi} component={ListContact} title="List of contacts" />
+                <Scene key="contactDetail" 
+                titleStyle={styles.tabBarTitle} 
+                tabBarStyle={styles.tabBarStyle}
+                leftButtonIconStyle={styles.leftButtonIconStyle }
+                 tabs={true} hideNavBar={false} title="Contact details" >
                     <Scene
                         key="tabOrders"
                         title="Orders"
                         icon={TabIcon}
-                        navigationBarStyle={styles.navi}
+                        navigationBarStyle={styles.navi} titleStyle={styles.tabBarTitle} 
+                        leftButtonIconStyle={styles.leftButtonIconStyle }
                         hideNavBar={false}
                         onSelect={(attr) => {
-                            Actions.tabOrders({type:ActionConst.REFRESH});
-                        } }
-                        >
-                        <Scene key="tabOrs" title="Orders"  component={ListOrders} hideNavBar={false} >
-                              
+                            Actions.tabOrders({ type: ActionConst.REFRESH });
+                        }}
+                    >
+                        <Scene key="tabOrs" title="Orders" component={ListOrders} hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle} >
+
                         </Scene>
-                        <Scene key="orderDetail" title="OD"  hideNavBar={false} >
-                            <Scene key="od" title="Order Detail"  component={OrderDetail} hideNavBar={false} />
-                        </Scene>  
+                        <Scene key="orderDetail" title="OD" hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle}>
+                            <Scene key="od" title="Order Detail" component={OrderDetail} hideNavBar={false} />
+                        </Scene>
                     </Scene>
                     <Scene
                         key="tabBasicInfo"
                         icon={TabIcon}
-                        title="Contact" 
+                        title="Contact"
                         navigationBarStyle={styles.navi}
+                        leftButtonIconStyle={styles.leftButtonIconStyle }
                         onSelect={(props) => {
                             Actions.tabInfo({ type: ActionConst.REFRESH });
-                        } }
-                        >
+                        }}
+                    >
                         <Scene key="tabInfo" title="Contact" component={ContactDetail} hideNavBar={false} />
                     </Scene>
                     <Scene
@@ -73,16 +78,17 @@ class NavigatorMain extends Component {
                         title="Summary"
                         icon={TabIcon}
                         navigationBarStyle={styles.navi}
+                        leftButtonIconStyle={styles.leftButtonIconStyle }
                         onSelect={() => {
                             Actions.tabSum({ type: ActionConst.REFRESH });
-                        } }
-                        >
-                        <Scene key="tabSum" title="Summary"  component={SceneContactDetail} hideNavBar={false} />
+                        }}
+                    >
+                        <Scene key="tabSum" title="Summary" component={SceneContactDetail} hideNavBar={false} />
                     </Scene>
-                    
-                    
+
+
                 </Scene>
-                
+
             </Scene>
         </Router>
     }
@@ -90,14 +96,25 @@ class NavigatorMain extends Component {
 
 const styles = StyleSheet.create({
     navi: {
-        backgroundColor:'grey',
-        opacity: 0.5
+        backgroundColor: 'darkorange',
+        color: 'white',
+        opacity: 1
+    },
+    navTitle: {
+        color: 'white', // changing navbar title color
+    },
+    tabBarTitle:{
+        color: 'white'
+    },
+    leftButtonIconStyle:{
+        tintColor:'white'
     },
     tabBarStyle: {
         borderTopWidth: .5,
+        color:'white',
         borderColor: '#b7b7b7',
-        backgroundColor: 'grey',
-        opacity: 0.75
+        backgroundColor: 'dimgray',
+        opacity: 1
     }
 });
 
