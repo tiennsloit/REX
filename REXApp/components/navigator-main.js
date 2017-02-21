@@ -97,7 +97,6 @@ class NavigatorMain extends Component {
 const styles = StyleSheet.create({
     navi: {
         backgroundColor: 'darkorange',
-        color: 'white',
         opacity: 1
     },
     navTitle: {
@@ -111,7 +110,6 @@ const styles = StyleSheet.create({
     },
     tabBarStyle: {
         borderTopWidth: .5,
-        color:'white',
         borderColor: '#b7b7b7',
         backgroundColor: 'dimgray',
         opacity: 1

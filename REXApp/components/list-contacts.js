@@ -55,6 +55,7 @@ class ListContact extends Component {
     }
 
     createNewOrder() {
+        
         Actions.orderDetail({
             contactEditable:true,
             dataFunction: () => { return Api.getOrderDefaultNewContact(); }, routeSaveFunction: () => {

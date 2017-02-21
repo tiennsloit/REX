@@ -136,7 +136,7 @@ class OrderDetail extends Component {
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Weight:</Text>
-                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.weight} onChangeText={(value) => this.updateText({order:{weight:{$set:value}}})}/>
+                            <TextInput keyboardType="numeric" style={styles.input} value={this.state.order.weight.toString()} onChangeText={(value) => this.updateText({order:{weight:{$set:value}}})}/>
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.label}>Price:</Text>

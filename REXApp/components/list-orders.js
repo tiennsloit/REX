@@ -79,6 +79,7 @@ class ListOrders extends Component {
                     renderRow={(rowData) =>
                         <View style={styles.rowFront}><ListOrdersItem rowData={rowData}/></View>
                     }
+                   enableEmptySections={true}
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                     contentContainerStyle={styles.listView}
                     renderHeader={() => this.state.hasData == true ? <Header /> : <Text></Text>}
@@ -110,7 +111,6 @@ const styles = StyleSheet.create({
     },
 
     newOrderButton:{
-        color:"white",
         backgroundColor:"darkorange",
         borderRadius:0,
         justifyContent: 'center'
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
 	rowBack: {
 		alignItems: 'center',
 		backgroundColor: 'red',
-        color:'white',
 		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

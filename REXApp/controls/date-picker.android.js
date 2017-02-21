@@ -40,7 +40,9 @@ class DatePicker extends Component {
     return (
       <View style={styles.row}>
         <TouchableWithoutFeedback style={styles.label}>
-          <Text style={styles.label}>{this.state.simpleText}</Text>
+          <View>
+            <Text style={styles.label}>{this.state.simpleText}</Text>
+          </View>
         </TouchableWithoutFeedback>
         <Text style={styles.icon}><Icon name="calendar" size={20} onPress={this.showPicker.bind(this, 'simple', { date: this.state.simpleDate })} /></Text>
       </View>
