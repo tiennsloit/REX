@@ -3,7 +3,7 @@ import ReactNative from 'react-native';
 import Api from '../api/api';
 import Header from '../components/list-view-header';
 import { Actions } from 'react-native-router-flux';
-
+import Icon from '../controls/icon';
 import Loading from '../components/loading';
 import {
     StyleSheet,
@@ -55,18 +55,14 @@ class ListContact extends Component {
     }
 
     createNewOrder() {
+        Actions.contactDetail();
         
-        Actions.orderDetail({
-            contactEditable:true,
-            dataFunction: () => { return Api.getOrderDefaultNewContact(); }, routeSaveFunction: () => {
-               Actions.pop();
-            }
-        });
         // Actions.orderDetail({ id: 0, dataFunction:()=>{ return Api.getOrderDefaultNewContact();} , routeSaveFunction:()=>{ Actions.contactList();}});
     }
 
     showDetail(contact) {
         Actions.contactDetail(contact);
+        
     }
 
     render() {
@@ -75,7 +71,7 @@ class ListContact extends Component {
             return (
                 <View style={styles.container}>
                     <Loading/>
-                    <Button style={styles.newOrderButton} color="grey" onPress={() => this.createNewOrder()} title="New order" />
+                    <Button style={styles.newOrderButton} color="darkorange" onPress={() => this.createNewOrder()} title="New order" />
                 </View>
             )
         }
@@ -85,7 +81,7 @@ class ListContact extends Component {
                     dataSource={this.state.mainListData}
                     renderRow={(rowData) =>
                         <TouchableHighlight onPress={() => { this.showDetail(rowData) }}>
-                            <Text style={styles.listViewItem}>{rowData.name}</Text>
+                            <Text style={styles.listViewItem}><Icon name="user" size={20}/>  {rowData.name}</Text>
                         </TouchableHighlight>
                     }
                     renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
