@@ -57,8 +57,8 @@ class NavigatorMain extends Component {
                         <Scene key="tabOrs" title="Orders" component={ListOrders} hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle} >
 
                         </Scene>
-                        <Scene key="orderDetail" title="OD" hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle}>
-                            <Scene key="od" title="Order Detail" component={OrderDetail} hideNavBar={false} />
+                        <Scene key="orderDetail" title="Order details" hideNavBar={false} navigationBarStyle={styles.navi} component={OrderDetail} titleStyle={styles.navTitle}>
+                      
                         </Scene>
                     </Scene>
                     <Scene
@@ -71,7 +71,7 @@ class NavigatorMain extends Component {
                             Actions.tabInfo({ type: ActionConst.REFRESH });
                         }}
                     >
-                        <Scene key="tabInfo" title="Contact" component={ContactDetail} hideNavBar={false} />
+                        <Scene key="tabInfo" title="Contact" component={ContactDetail} hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle} />
                     </Scene>
                     <Scene
                         key="tabSummary"
@@ -83,7 +83,7 @@ class NavigatorMain extends Component {
                             Actions.tabSum({ type: ActionConst.REFRESH });
                         }}
                     >
-                        <Scene key="tabSum" title="Summary" component={SceneContactDetail} hideNavBar={false} />
+                        <Scene key="tabSum" title="Summary" component={SceneContactDetail} hideNavBar={false} navigationBarStyle={styles.navi} titleStyle={styles.navTitle} />
                     </Scene>
 
 
