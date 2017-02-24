@@ -11,7 +11,6 @@ namespace REX.Core.Services
         ICollection<Order> GetOrders(int contactId, bool include = false);
         ICollection<Order> GetOrders(string contactName, bool include = false);
         ICollection<Order> GetOrders();
-        Order DefaultNewOrder(int userId, int contactId);
         Order DefaultNewOrder(int userId, Contact contact);
         void UpdateOrder(Order order);
         void DeleteOrder(int id);

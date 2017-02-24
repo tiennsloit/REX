@@ -17,19 +17,22 @@ namespace REX.Core.Services
         }
         public Order CreateOrder(Order order)
         {
+            var returnContact = new Contact();
             using (var dbContext = new RexDbContext())
             {
-                if(order.Contact.Id > 0)
+                if(order.Contact != null && order.Contact.Id > 0)
                 {
                     //update contact separately because we haven't create a function to update all children of the order, but contact have been done.
+                    //create or update contact
                     _contactService.UpdateContact(order.Contact);
-                    var updatedContact = _contactService.GetContact(order.Contact.Id);
+                    returnContact = _contactService.GetContact(order.Contact.Id);
                     order.Contact = null;//set to null so that the contact/favourite will not be create again in the database (should only the contactId is ok)
                 }
                 dbContext.Orders.Add(order);
                 dbContext.SaveChanges();
             }
 
+            order.Contact = returnContact;
             return order;
         }
 
@@ -147,15 +150,6 @@ namespace REX.Core.Services
             return res;
         }
 
-
-        public Order DefaultNewOrder(int userId, int contactId)
-        {
-            var order = DefaultNewOrderOriginal();
-            order.UserId = userId;
-            order.ContactId = contactId;
-            return order;
-        }
-
         private Order DefaultNewOrderOriginal()
         {
             return new Order
@@ -186,6 +180,7 @@ namespace REX.Core.Services
             var order = DefaultNewOrderOriginal();
             order.UserId = userId;
             order.Contact = contact;
+            order.ContactId = contact.Id;
             return order;
         }
 
