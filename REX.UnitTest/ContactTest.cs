@@ -140,6 +140,21 @@ namespace REX.UnitTest
 
         }
 
+        [TestMethod]
+        public void RemoveContact()
+        {
+            var ct = TemplateNewContact("Contact1");
+            //create a contact first
+            contactService.CreateContact(ct);
+
+            var contactNew = contactService.GetContact("Contact1");
+            Assert.AreNotEqual(null, contactNew);
+
+            contactService.RemoveContact("Contact1");
+            var contactRemoved = contactService.GetContact("Contact1");
+            Assert.AreEqual(null, contactRemoved);
+        }
+
 
         //[TestMethod]
         public void TestMethod1()

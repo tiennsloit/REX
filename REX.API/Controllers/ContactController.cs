@@ -28,6 +28,12 @@ namespace REX.API.Controllers
             return "value";
         }
 
+        [Route("GetContactByDefault")]
+        public Contact GetDefaultContact()
+        {
+            return _contactService.DefaultNewContact();
+        }
+
         // POST api/<controller>
         /// <summary>
         /// Can test with postman using http://tyuiop.com/api/contact/postcontact
@@ -36,17 +42,22 @@ namespace REX.API.Controllers
         /// <returns></returns>
         public string PostContact(Contact contact)
         {
+            _contactService.CreateContact(contact);
             return "True";
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public string Put(Contact contact)
         {
+            _contactService.UpdateContact(contact);
+            return "True";
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            _contactService.RemoveContact(id);
+            return "True";
         }
     }
 }
