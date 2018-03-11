@@ -7,13 +7,13 @@ namespace REX.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class isDelete_Order : IMigrationMetadata
+    public sealed partial class start : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(isDelete_Order));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(start));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702041235211_isDelete_Order"; }
+            get { return "201803111101433_start"; }
         }
         
         string IMigrationMetadata.Source

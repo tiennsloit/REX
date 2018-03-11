@@ -3,7 +3,7 @@ namespace REX.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class StartUp : DbMigration
+    public partial class start : DbMigration
     {
         public override void Up()
         {
@@ -47,7 +47,7 @@ namespace REX.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ContactId = c.Int(nullable: false),
-                        RiceTypeId = c.Int(nullable: false),
+                        ProductTypeId = c.Int(nullable: false),
                         Price1 = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Price2 = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IsCurrently = c.Boolean(nullable: false),
@@ -55,12 +55,12 @@ namespace REX.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contacts", t => t.ContactId, cascadeDelete: true)
-                .ForeignKey("dbo.RiceTypes", t => t.RiceTypeId, cascadeDelete: true)
+                .ForeignKey("dbo.ProductTypes", t => t.ProductTypeId, cascadeDelete: true)
                 .Index(t => t.ContactId)
-                .Index(t => t.RiceTypeId);
+                .Index(t => t.ProductTypeId);
             
             CreateTable(
-                "dbo.RiceTypes",
+                "dbo.ProductTypes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -86,7 +86,7 @@ namespace REX.Data.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ContactId = c.Int(nullable: false),
                         Weight = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        RiceType1Id = c.Int(nullable: false),
+                        ProductTypeId = c.Int(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Surcharge = c.Decimal(nullable: false, precision: 18, scale: 2),
                         AmountToReceived = c.Decimal(nullable: false, precision: 18, scale: 2),
@@ -103,13 +103,14 @@ namespace REX.Data.Migrations
                         DateCreated = c.DateTime(nullable: false),
                         DateModified = c.DateTime(nullable: false),
                         UserId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contacts", t => t.ContactId, cascadeDelete: true)
-                .ForeignKey("dbo.RiceTypes", t => t.RiceType1Id, cascadeDelete: true)
+                .ForeignKey("dbo.ProductTypes", t => t.ProductTypeId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.ContactId)
-                .Index(t => t.RiceType1Id)
+                .Index(t => t.ProductTypeId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -129,23 +130,23 @@ namespace REX.Data.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Orders", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Orders", "RiceType1Id", "dbo.RiceTypes");
+            DropForeignKey("dbo.Orders", "ProductTypeId", "dbo.ProductTypes");
             DropForeignKey("dbo.Orders", "ContactId", "dbo.Contacts");
             DropForeignKey("dbo.Contacts", "TimeCanReceivedId", "dbo.TimeADays");
-            DropForeignKey("dbo.Favourites", "RiceTypeId", "dbo.RiceTypes");
+            DropForeignKey("dbo.Favourites", "ProductTypeId", "dbo.ProductTypes");
             DropForeignKey("dbo.Favourites", "ContactId", "dbo.Contacts");
             DropForeignKey("dbo.Contacts", "DistrictId", "dbo.Districts");
             DropIndex("dbo.Orders", new[] { "UserId" });
-            DropIndex("dbo.Orders", new[] { "RiceType1Id" });
+            DropIndex("dbo.Orders", new[] { "ProductTypeId" });
             DropIndex("dbo.Orders", new[] { "ContactId" });
-            DropIndex("dbo.Favourites", new[] { "RiceTypeId" });
+            DropIndex("dbo.Favourites", new[] { "ProductTypeId" });
             DropIndex("dbo.Favourites", new[] { "ContactId" });
             DropIndex("dbo.Contacts", new[] { "TimeCanReceivedId" });
             DropIndex("dbo.Contacts", new[] { "DistrictId" });
             DropTable("dbo.Users");
             DropTable("dbo.Orders");
             DropTable("dbo.TimeADays");
-            DropTable("dbo.RiceTypes");
+            DropTable("dbo.ProductTypes");
             DropTable("dbo.Favourites");
             DropTable("dbo.Districts");
             DropTable("dbo.Contacts");
