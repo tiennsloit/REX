@@ -1,0 +1,15 @@
+drop table orders
+
+drop table favourites
+
+drop table ricetypes
+
+drop table contacts
+
+drop table districts
+
+drop table timeadays
+
+drop table users
+
+drop table __migrationhistory
