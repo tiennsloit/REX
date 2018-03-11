@@ -55,6 +55,8 @@ namespace REX.API.Controllers
         /// </summary>
         /// <param name="Id">The identifier.</param>
         /// <returns></returns>
+        /// 
+        [Route("GetOrderById/{Id}")]
         public Order GetOrder(int Id)
         {
             //todo:load the current favourite to the order
