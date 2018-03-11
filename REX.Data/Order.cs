@@ -14,9 +14,9 @@ namespace REX.Data
         public int ContactId { get; set; }
         public Contact Contact { get; set; }
         public decimal Weight { get; set; }
-        public RiceType RiceType { get; set; }
-        [ForeignKey("RiceType")]
-        public int RiceType1Id { get; set; }
+        public ProductType ProductType { get; set; }
+        [ForeignKey("ProductType")]
+        public int ProductTypeId { get; set; }
         public decimal Price { get; set; }
         public decimal Surcharge { get; set; }
         public decimal AmountToReceived { get; set; }

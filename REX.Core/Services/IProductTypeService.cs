@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace REX.Core.Services
 {
-    public interface IRiceTypeService
+    public interface IProductTypeService
     {
-        ICollection<RiceType> GetRiceTypes();
+        ICollection<ProductType> GetRiceTypes();
     }
 }

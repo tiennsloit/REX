@@ -15,9 +15,9 @@ namespace REX.Data
         public int ContactId { get; set; }
         [JsonIgnore]
         public Contact Contact { get; set; }
-        public RiceType RiceType { get; set; }
-        [ForeignKey("RiceType")]
-        public int RiceTypeId { get; set; }
+        public ProductType ProductType { get; set; }
+        [ForeignKey("ProductType")]
+        public int ProductTypeId { get; set; }
         public decimal Price1 { get; set; }
         public decimal Price2 { get; set; }
         public bool IsCurrently { get; set; }

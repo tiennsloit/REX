@@ -207,11 +207,11 @@
     <Compile Include="Services\IDistrictService.cs" />
     <Compile Include="Services\IFavouriteService.cs" />
     <Compile Include="Services\IOrderService.cs" />
-    <Compile Include="Services\IRiceTypeService.cs" />
+    <Compile Include="Services\IProductTypeService.cs" />
     <Compile Include="Services\ITimeADayService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\OrderService.cs" />
-    <Compile Include="Services\RiceTypeService.cs" />
+    <Compile Include="Services\ProductTypeService.cs" />
     <Compile Include="Services\TimeADayService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="StringHelper.cs" />

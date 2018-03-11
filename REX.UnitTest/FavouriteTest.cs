@@ -78,7 +78,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 6
             };
 
@@ -97,7 +97,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 6
             };
 
@@ -106,7 +106,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 800,
-                RiceTypeId = 2,
+                ProductTypeId = 2,
                 Weight = 6
             };
 
@@ -127,7 +127,7 @@ namespace REX.UnitTest
                 IsCurrently = false,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 6
             };
 
@@ -136,7 +136,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 800,
-                RiceTypeId = 2,
+                ProductTypeId = 2,
                 Weight = 6
             };
 
@@ -145,7 +145,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 800,
-                RiceTypeId = 2,
+                ProductTypeId = 2,
                 Weight = 6
             };
 

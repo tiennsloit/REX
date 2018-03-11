@@ -101,8 +101,8 @@ namespace REX.Core.Services
                 if (include)
                 {
                     res = dbContext.Orders
-                    .Include(e => e.Contact.Favourites.Select(t => t.RiceType))
-                    .Include(e => e.RiceType)
+                    .Include(e => e.Contact.Favourites.Select(t => t.ProductType))
+                    .Include(e => e.ProductType)
                     .Include(e => e.User)
                     .Where(x => x.ContactId == contactId && x.IsDeleted == false).ToList();
                 }
@@ -123,8 +123,8 @@ namespace REX.Core.Services
                 if (include)
                 {
                     res = dbContext.Orders
-                                        .Include(e => e.Contact.Favourites.Select(t => t.RiceType))
-                                        .Include(e => e.RiceType)
+                                        .Include(e => e.Contact.Favourites.Select(t => t.ProductType))
+                                        .Include(e => e.ProductType)
                                         .Include(e => e.User)
                                         .Where(x => x.Contact.Name == contactName && x.IsDeleted == false).ToList();
                 }
@@ -167,7 +167,7 @@ namespace REX.Core.Services
                 PromoPrice = 0,
                 Received = 0,
                 ShipFee = 0,
-                RiceType1Id = 1,
+                ProductTypeId = 1,
                 Surcharge = 0,
                 TotalPrice = 0,
                 Weight = 10,

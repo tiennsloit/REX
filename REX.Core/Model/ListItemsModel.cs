@@ -11,6 +11,6 @@ namespace REX.Core.Model
     {
         public ICollection<District> Districts { get; set; }
         public ICollection<TimeADay> TimesInDay { get; set; }
-        public ICollection<RiceType> RiceTypes { get; set; }
+        public ICollection<ProductType> ProductTypes { get; set; }
     }
 }

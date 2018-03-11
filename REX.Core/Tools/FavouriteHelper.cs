@@ -15,7 +15,7 @@ namespace REX.Core.Tools
             return favourite1.ContactId == favourite2.ContactId
                 && favourite1.Price1 == favourite2.Price1
                 && favourite1.Price2 == favourite2.Price2
-                && favourite1.RiceTypeId == favourite2.RiceTypeId
+                && favourite1.ProductTypeId == favourite2.ProductTypeId
                 && favourite1.Weight == favourite2.Weight;
         }
     }

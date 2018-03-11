@@ -314,6 +314,8 @@
     </Content>
     <None Include="Properties\PublishProfiles\api.pubxml" />
     <None Include="Properties\PublishProfiles\REXWebAPI.pubxml" />
+    <None Include="Properties\PublishProfiles\simplestorekitws - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\simplestorekitws - Web Deploy.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

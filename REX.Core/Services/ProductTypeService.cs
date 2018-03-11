@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace REX.Core.Services
 {
-    public class RiceTypeService:IRiceTypeService
+    public class ProductTypeService:IProductTypeService
     {
-        public ICollection<RiceType> GetRiceTypes()
+        public ICollection<ProductType> GetRiceTypes()
         {
             using (var dbContext = new RexDbContext())
             {
-                return dbContext.RiceType.ToList();
+                return dbContext.ProductType.ToList();
             }
         }
     }

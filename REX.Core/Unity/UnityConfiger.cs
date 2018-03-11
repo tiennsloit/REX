@@ -20,7 +20,7 @@ namespace REX.Core.Unity
             container.RegisterType<IFavouriteService, FavouriteService>();
 
             container.RegisterType<IDistrictService, DistrictService>();
-            container.RegisterType<IRiceTypeService, RiceTypeService>();
+            container.RegisterType<IProductTypeService, ProductTypeService>();
             container.RegisterType<ITimeADayService, TimeADayService>();
             // return the container so it can be used for the dependencyresolver.  
             return container;

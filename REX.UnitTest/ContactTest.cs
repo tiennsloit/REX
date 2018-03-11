@@ -40,7 +40,7 @@ namespace REX.UnitTest
                 IsCurrently = true,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 6
 
             };
@@ -76,7 +76,7 @@ namespace REX.UnitTest
             IsCurrently = true,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 10} };
             contactService.UpdateContact(ct);
 
@@ -101,7 +101,7 @@ namespace REX.UnitTest
             IsCurrently = true,
                 Price1 = 400,
                 Price2 = 700,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 999} );
             contactService.UpdateContact(ct);
 

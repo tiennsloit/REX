@@ -74,7 +74,7 @@ namespace REX.UnitTest
             //update the new order
             newOrder.Price = 500;
             newOrder.Paid = 1000;
-            newOrder.RiceType1Id = 2;
+            newOrder.ProductTypeId = 2;
             orderService.UpdateOrder(newOrder);
 
             var updatedOrder = orderService.GetOrder(newOrder.Id);

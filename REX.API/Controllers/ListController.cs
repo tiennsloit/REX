@@ -12,9 +12,9 @@ namespace REX.API.Controllers
     public class ListController : ApiController
     {
         private readonly IDistrictService _districtService;
-        private readonly IRiceTypeService _riceTypeService;
+        private readonly IProductTypeService _riceTypeService;
         private readonly ITimeADayService _timeADayService;
-        public ListController(IDistrictService districtService, IRiceTypeService riceTypeService, ITimeADayService timeADayService)
+        public ListController(IDistrictService districtService, IProductTypeService riceTypeService, ITimeADayService timeADayService)
         {
             _districtService = districtService;
             _riceTypeService = riceTypeService;
@@ -26,7 +26,7 @@ namespace REX.API.Controllers
             return new ListItemsModel
             {
                 Districts = _districtService.GetDistricts(),
-                RiceTypes = _riceTypeService.GetRiceTypes(),
+                ProductTypes = _riceTypeService.GetRiceTypes(),
                 TimesInDay = _timeADayService.GetTimesADay()
             };
         }

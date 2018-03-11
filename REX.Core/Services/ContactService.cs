@@ -64,7 +64,7 @@ namespace REX.Core.Services
                 IsCurrently = true,
                 Price1 = 0,
                 Price2 = 0,
-                RiceTypeId = 1,
+                ProductTypeId = 1,
                 Weight = 0
 
             };
@@ -149,8 +149,8 @@ namespace REX.Core.Services
                                 IsCurrently = childModel.IsCurrently,
                                 Price1 = childModel.Price1,
                                 Price2 = childModel.Price2,
-                                RiceType = childModel.RiceType,
-                                RiceTypeId = childModel.RiceTypeId,
+                                ProductType = childModel.ProductType,
+                                ProductTypeId = childModel.ProductTypeId,
                                 Weight = childModel.Weight
                             };
                             existingParent.Favourites.Add(newChild);
