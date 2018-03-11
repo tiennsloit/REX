@@ -33,6 +33,12 @@ namespace REX.API.Controllers
             return _orderService.GetOrders(contactId);
         }
 
+        [Route("GetLatestOrders/{batchSize}")]
+        public ICollection<Order> GetLatestOrders(int batchSize)
+        {
+            return _orderService.GetOrders().Take(batchSize).ToList();
+        }
+
         [Route("GetOrdersWithDetails/{contactId}")]
         public ICollection<Order> GetOrdersWithDetail(int contactId)
         {

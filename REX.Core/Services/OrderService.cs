@@ -25,14 +25,12 @@ namespace REX.Core.Services
                     //update contact separately because we haven't create a function to update all children of the order, but contact have been done.
                     //create or update contact
                     _contactService.UpdateContact(order.Contact);
-                    returnContact = _contactService.GetContact(order.Contact.Id);
-                    order.Contact = null;//set to null so that the contact/favourite will not be create again in the database (should only the contactId is ok)
                 }
+
                 dbContext.Orders.Add(order);
                 dbContext.SaveChanges();
             }
 
-            order.Contact = returnContact;
             return order;
         }
 

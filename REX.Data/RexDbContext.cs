@@ -21,5 +21,7 @@ namespace REX.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<User> Users { get; set; }
+
+       
     }
 }

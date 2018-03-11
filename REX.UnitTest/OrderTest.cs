@@ -69,60 +69,60 @@ namespace REX.UnitTest
         public void CreateOrder_Using_Default()
         {
             string json = @"{
-    'id': 0,
-    'contactId': 0,
-    'contact': {
-        'id': 0,
-        'name': '',
-        'faceBookName': '',
-        'phone1': '',
-        'phone2': '',
-        'address': '',
-        'districtId': 1,
-        'district': null,
-        'favourites': [
-            {
                 'id': 0,
                 'contactId': 0,
+                'contact': {
+                    'id': 0,
+                    'name': '',
+                    'faceBookName': '',
+                    'phone1': '',
+                    'phone2': '',
+                    'address': '',
+                    'districtId': 1,
+                    'district': null,
+                    'favourites': [
+                        {
+                            'id': 0,
+                            'contactId': 0,
+                            'productType': null,
+                            'productTypeId': 1,
+                            'price1': 0,
+                            'price2': 0,
+                            'isCurrently': true,
+                            'weight': 0
+                        }
+                    ],
+                    'timeCanReceived': null,
+                    'timeCanReceivedId': 1,
+                    'howManyDaysOfConsume': 30,
+                    'howManyWeightOfConsume': 10,
+                    'nextShipDate': '2018-03-11T18:04:57.339366+07:00',
+                    'satisfied': '',
+                    'unsatisfied': '',
+                    'reasonNotSatisfied': ''
+                },
+                'weight': 10,
                 'productType': null,
                 'productTypeId': 1,
-                'price1': 0,
-                'price2': 0,
-                'isCurrently': true,
-                'weight': 0
-            }
-        ],
-        'timeCanReceived': null,
-        'timeCanReceivedId': 1,
-        'howManyDaysOfConsume': 30,
-        'howManyWeightOfConsume': 10,
-        'nextShipDate': '2018-03-11T18:04:57.339366+07:00',
-        'satisfied': '',
-        'unsatisfied': '',
-        'reasonNotSatisfied': ''
-    },
-    'weight': 10,
-    'productType': null,
-    'productTypeId': 1,
-    'price': 0,
-    'surcharge': 0,
-    'amountToReceived': 0,
-    'coverPrice': 0,
-    'promoPrice': 0,
-    'totalPrice': 0,
-    'shipFee': 0,
-    'otherFee': 0,
-    'profit': 0,
-    'paid': 0,
-    'received': 0,
-    'dateShipped': '2018-03-11T18:04:57.3403647+07:00',
-    'isNew': true,
-    'dateCreated': '2018-03-11T18:04:57.3403647+07:00',
-    'dateModified': '2018-03-11T18:04:57.3403647+07:00',
-    'userId': 1,
-    'user': null,
-    'isDeleted': false
-}";
+                'price': 0,
+                'surcharge': 0,
+                'amountToReceived': 0,
+                'coverPrice': 0,
+                'promoPrice': 0,
+                'totalPrice': 0,
+                'shipFee': 0,
+                'otherFee': 0,
+                'profit': 0,
+                'paid': 0,
+                'received': 0,
+                'dateShipped': '2018-03-11T18:04:57.3403647+07:00',
+                'isNew': true,
+                'dateCreated': '2018-03-11T18:04:57.3403647+07:00',
+                'dateModified': '2018-03-11T18:04:57.3403647+07:00',
+                'userId': 1,
+                'user': null,
+                'isDeleted': false
+            }";
 
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
