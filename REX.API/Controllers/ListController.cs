@@ -26,7 +26,7 @@ namespace REX.API.Controllers
             return new ListItemsModel
             {
                 Districts = _districtService.GetDistricts(),
-                ProductTypes = _riceTypeService.GetRiceTypes(),
+                ProductTypes = _riceTypeService.GetProductTypes(),
                 TimesInDay = _timeADayService.GetTimesADay()
             };
         }

@@ -9,7 +9,7 @@ namespace REX.Core.Services
 {
     public class ProductTypeService:IProductTypeService
     {
-        public ICollection<ProductType> GetRiceTypes()
+        public ICollection<ProductType> GetProductTypes()
         {
             using (var dbContext = new RexDbContext())
             {

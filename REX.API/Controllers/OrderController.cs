@@ -56,7 +56,8 @@ namespace REX.API.Controllers
         /// <param name="Id">The identifier.</param>
         /// <returns></returns>
         /// 
-        [Route("GetOrderById/{Id}")]
+        [HttpGet]
+        [Route("Api/Order/{Id}")]
         public Order GetOrder(int Id)
         {
             //todo:load the current favourite to the order
@@ -97,7 +98,9 @@ namespace REX.API.Controllers
         }
         
         // POST api/<controller>
-        public string PostOrder(Order order)
+        [HttpPost]
+        [Route("Api/order")]
+        public string CreateOrder(Order order)
         {
             //merge favourite: the favourite from client can be a new/existing one come from a new contact/existing contact.
             order.Contact.Favourites = _favouriteService.MergeFavourites(order.Contact.Favourites.FirstOrDefault(), _favouriteService.GetFavourites(order.ContactId));
@@ -106,7 +109,9 @@ namespace REX.API.Controllers
         }
 
         // PUT api/<controller>/5
-        public string PutOrder(Order order)
+        [HttpPut]
+        [Route("Api/order")]
+        public string UpdateOrder(Order order)
         {
             order.Contact.Favourites = _favouriteService.MergeFavourites(order.Contact.Favourites.FirstOrDefault(), _favouriteService.GetFavourites(order.ContactId));
             _orderService.UpdateOrder(order);
