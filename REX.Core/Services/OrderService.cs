@@ -85,6 +85,7 @@ namespace REX.Core.Services
             {
                 res = dbContext.Orders.Where(x => x.Id == id)
                     .Include(y=>y.Contact.Favourites)
+                    .Include(y=>y.ProductType)
                     .FirstOrDefault();
             }
 
@@ -142,7 +143,9 @@ namespace REX.Core.Services
             var res = new List<Order>();
             using (var dbContext = new RexDbContext())
             {
-                res = dbContext.Orders.Where(x => x.IsNew == true).ToList();
+                res = dbContext.Orders
+                    .Include(e=>e.ProductType)
+                    .Where(x => x.IsNew == true).ToList();
             }
 
             return res;
