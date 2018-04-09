@@ -70,12 +70,13 @@ namespace REX.Core.Services
             };
             return new Contact
             {
+                
                 Address = "",
                 DistrictId = 1,
                 FaceBookName = "",
                 HowManyDaysOfConsume = 30,
                 HowManyWeightOfConsume = 10,
-                Name = "",
+                Name = "vãng lai",
                 NextShipDate = DateTime.Now,
                 Phone1 = "",
                 Phone2 = "",

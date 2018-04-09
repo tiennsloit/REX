@@ -78,7 +78,7 @@ namespace REX.API.Controllers
             return order;
         }
 
-        [Route("GetOrderByDefault/{userId}/{contactId?}")]
+        [Route("Api/OrderByDefault/{userId}/{contactId?}")]
         public Order GetOrderByDefault(int userId, int? contactId = null)
         {
             var contact = new Contact();
