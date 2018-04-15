@@ -176,6 +176,7 @@ namespace REX.Core.Services
                 Received = 0,
                 ShipFee = 0,
                 ProductTypeId = productType.Id,
+                ProductType = productType,
                 Surcharge = 0,
                 TotalPrice = 0,
                 Weight = 10,
