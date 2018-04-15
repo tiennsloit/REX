@@ -200,9 +200,11 @@
     <Compile Include="Model\ContactModel.cs" />
     <Compile Include="Model\ListItemsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BarcodeService.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\DistrictService.cs" />
     <Compile Include="Services\FavouriteService.cs" />
+    <Compile Include="Services\IBarcodeService.cs" />
     <Compile Include="Services\IContactService.cs" />
     <Compile Include="Services\IDistrictService.cs" />
     <Compile Include="Services\IFavouriteService.cs" />
@@ -223,6 +225,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\REX.Barcode\REX.Barcode.csproj">
+      <Project>{083aee2b-70b3-4524-8e5d-ee081d50c43c}</Project>
+      <Name>REX.Barcode</Name>
+    </ProjectReference>
     <ProjectReference Include="..\REX.Data\REX.Data.csproj">
       <Project>{CFC50352-3984-4949-B2B8-1B25CC5BE779}</Project>
       <Name>REX.Data</Name>

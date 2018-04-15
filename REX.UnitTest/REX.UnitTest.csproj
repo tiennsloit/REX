@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarcodeTest.cs" />
     <Compile Include="DatabaseIniter.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="TestBase.cs" />
@@ -148,6 +149,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\REX.Barcode\REX.Barcode.csproj">
+      <Project>{083aee2b-70b3-4524-8e5d-ee081d50c43c}</Project>
+      <Name>REX.Barcode</Name>
+    </ProjectReference>
     <ProjectReference Include="..\REX.Core\REX.Core.csproj">
       <Project>{87B0505E-8E4F-4AB9-BC4F-F39BA57FBEEB}</Project>
       <Name>REX.Core</Name>

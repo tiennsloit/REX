@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using REX.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,23 @@ namespace REX.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(BuildUnityContainer()));
+
+        }
+
+        private static IUnityContainer BuildUnityContainer()
+        {
+            var container = new UnityContainer();
+
+            // register all your components with the container here
+            // it is NOT necessary to register your controllers
+
+           
+            container.RegisterType<IBarcodeService, BarcodeService>();
+
+       
+
+            return container;
         }
     }
 }

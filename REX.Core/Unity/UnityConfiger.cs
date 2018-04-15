@@ -22,6 +22,8 @@ namespace REX.Core.Unity
             container.RegisterType<IDistrictService, DistrictService>();
             container.RegisterType<IProductTypeService, ProductTypeService>();
             container.RegisterType<ITimeADayService, TimeADayService>();
+            container.RegisterType<IBarcodeService, BarcodeService>();
+
             // return the container so it can be used for the dependencyresolver.  
             return container;
         }

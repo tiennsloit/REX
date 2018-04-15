@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REX.Data", "REX.Data\REX.Data.csproj", "{CFC50352-3984-4949-B2B8-1B25CC5BE779}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REX.Barcode", "REX.Barcode\REX.Barcode.csproj", "{083AEE2B-70B3-4524-8E5D-EE081D50C43C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{CFC50352-3984-4949-B2B8-1B25CC5BE779}.Release|x64.Build.0 = Release|Any CPU
 		{CFC50352-3984-4949-B2B8-1B25CC5BE779}.Release|x86.ActiveCfg = Release|Any CPU
 		{CFC50352-3984-4949-B2B8-1B25CC5BE779}.Release|x86.Build.0 = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|x64.Build.0 = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Debug|x86.Build.0 = Debug|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|x64.ActiveCfg = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|x64.Build.0 = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|x86.ActiveCfg = Release|Any CPU
+		{083AEE2B-70B3-4524-8E5D-EE081D50C43C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
