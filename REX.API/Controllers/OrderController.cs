@@ -97,20 +97,20 @@ namespace REX.API.Controllers
             return defaultOrder;
         }
 
-        [Route("Api/OrderByDefault/user/{userId}/productType/{productTypeId?}")]
-        public Order GetOrderDefaultByProductType(int userId, int? productTypeId)
+        [Route("Api/Order/user/{userId}/productType/{productTypeId}")]
+        public Order GetOrderDefaultByProductType(int userId, int productTypeId)
         {
             var contact = new Contact();
             
             contact = _contactService.DefaultNewContact();
            
-            var defaultOrder = _orderService.DefaultNewOrderByProductTypeId(userId, contact, productTypeId.Value);
+            var defaultOrder = _orderService.DefaultNewOrderByProductTypeId(userId, contact, productTypeId);
             defaultOrder.ContactId = contact.Id;
 
             return defaultOrder;
         }
 
-        [Route("Api/OrderByDefault/user/{userId}/productTypeDefault")]
+        [Route("Api/Order/user/{userId}")]
         public Order GetOrderDefaultByProductType(int userId)
         {
             var contact = new Contact();
