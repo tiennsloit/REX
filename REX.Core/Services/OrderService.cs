@@ -11,9 +11,11 @@ namespace REX.Core.Services
     public class OrderService: IOrderService
     {
         private readonly IContactService _contactService;
-        public OrderService(IContactService contactService)
+        private readonly IProductTypeService _productTypeService;
+        public OrderService(IContactService contactService, IProductTypeService productTypeService)
         {
             _contactService = contactService;
+            _productTypeService = productTypeService;
         }
         public Order CreateOrder(Order order)
         {
@@ -151,8 +153,13 @@ namespace REX.Core.Services
             return res;
         }
 
-        private Order DefaultNewOrderOriginal()
+        private Order DefaultNewOrderOriginal(int? productTypeId = null)
         {
+            var productType = _productTypeService.GetProductTypes().FirstOrDefault();
+            if(productTypeId.HasValue)
+            {
+                productType = _productTypeService.GetProductType(productTypeId.Value);
+            }
             return new Order
             {
                 AmountToReceived = 0,
@@ -163,12 +170,12 @@ namespace REX.Core.Services
                 IsNew = true,
                 OtherFee = 0,
                 Paid = 0,
-                Price = 0,
+                Price = productType.Price,
                 Profit = 0,
                 PromoPrice = 0,
                 Received = 0,
                 ShipFee = 0,
-                ProductTypeId = 1,
+                ProductTypeId = productType.Id,
                 Surcharge = 0,
                 TotalPrice = 0,
                 Weight = 10,
@@ -179,6 +186,15 @@ namespace REX.Core.Services
         public Order DefaultNewOrder(int userId, Contact contact)
         {
             var order = DefaultNewOrderOriginal();
+            order.UserId = userId;
+            order.Contact = contact;
+            order.ContactId = contact.Id;
+            return order;
+        }
+
+        public Order DefaultNewOrderByProductTypeId(int userId, Contact contact, int? productTypeId)
+        {
+            var order = DefaultNewOrderOriginal(productTypeId);
             order.UserId = userId;
             order.Contact = contact;
             order.ContactId = contact.Id;

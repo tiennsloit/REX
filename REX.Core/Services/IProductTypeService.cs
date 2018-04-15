@@ -6,5 +6,7 @@ namespace REX.Core.Services
     public interface IProductTypeService
     {
         ICollection<ProductType> GetProductTypes();
+
+        ProductType GetProductType(int productTypeId);
     }
 }

@@ -96,6 +96,19 @@ namespace REX.API.Controllers
 
             return defaultOrder;
         }
+
+        [Route("Api/OrderByDefaultByProductType/{userId}/{productTypeId?}")]
+        public Order GetOrderDefaultByProductType(int userId, int? productTypeId)
+        {
+            var contact = new Contact();
+            
+            contact = _contactService.DefaultNewContact();
+           
+            var defaultOrder = _orderService.DefaultNewOrderByProductTypeId(userId, contact, productTypeId.Value);
+            defaultOrder.ContactId = contact.Id;
+
+            return defaultOrder;
+        }
         
         // POST api/<controller>
         [HttpPost]
