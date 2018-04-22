@@ -14,7 +14,7 @@ namespace REX.Barcode
         {
             BarcodeSymbology s = BarcodeSymbology.Code39C;
             BarcodeDraw drawObject = BarcodeDrawFactory.GetSymbology(s);
-            var metrics = drawObject.GetDefaultMetrics(10);
+            var metrics = drawObject.GetDefaultMetrics(60);
             metrics.Scale = 2;
             var barcodeImage = drawObject.Draw(text, metrics);
 

@@ -36,8 +36,8 @@ namespace REX.API
 
            
             container.RegisterType<IBarcodeService, BarcodeService>();
+            container.RegisterType<IProductTypeService, ProductTypeService>();
 
-       
 
             return container;
         }
