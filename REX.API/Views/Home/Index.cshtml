@@ -4,16 +4,41 @@
 <div class="container">
     @foreach (ProductTypeModel product in Model)
     {
-        <br />
-        <div class="row" style="height:150px">
-            <div class="col-md-6">
-                <img src='data:image/png;base64,@product.BarCode' />
-            </div>
-            <div class="col-md-6">
-                <div>@product.Name</div>
-                <div>@product.Price</div>
-            </div>
 
-        </div>
+    }
+    @{var products = Model.ToArray(); }
+    @for (int i = 0; i < products.Length; i++)
+        {
+            var product = products[i];
+            if (i % 2 == 0)
+            {
+            <br />
+            <div class="row" style="height:200px">
+                <div class="col-md-6">
+                    <img src='data:image/png;base64,@product.BarCode' height="300" />
+                    <div>@product.Name</div>
+                    <div>@product.Price</div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <br />
+            <div class="row" style="height:200px">
+                <div class="col-md-6">
+                    
+                </div>
+                <div class="col-md-6">
+                    <img src='data:image/png;base64,@product.BarCode' height="300" />
+                    <div>@product.Name</div>
+                    <div>@product.Price</div>
+                </div>
+
+            </div>
+        }
     }
 </div>

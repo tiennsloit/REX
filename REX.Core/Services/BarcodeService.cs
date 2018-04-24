@@ -12,7 +12,7 @@ namespace REX.Core.Services
         public string GenerateBarcode(string text)
         {
             var bc = new BarCodeGenerator();
-            return bc.GetBarCodeFromString(text);
+            return bc.GetQRCodeFromString(text);
         }
     }
 }

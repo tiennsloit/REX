@@ -17,5 +17,12 @@ namespace REX.UnitTest
             var bc = new BarCodeGenerator();
             var str = bc.GetBarCodeFromString("1");
         }
+        [TestMethod]
+        public void Test_GenerateQRCode()
+        {
+            var bcc = new BarCodeGenerator();
+            var qrString = bcc.GetQRCodeFromString("1");
+            Assert.IsTrue(qrString.Length > 0);
+        }
     }
 }
