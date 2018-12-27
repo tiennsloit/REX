@@ -36,7 +36,7 @@ namespace REX.API.Controllers
         [Route("GetLatestOrders/{batchSize}")]
         public ICollection<Order> GetLatestOrders(int batchSize)
         {
-            return _orderService.GetOrders().Take(batchSize).ToList();
+            return _orderService.GetOrders().Take(batchSize).OrderByDescending(x=>x.DateModified).ToList();
         }
 
         [Route("GetOrdersWithDetails/{contactId}")]
