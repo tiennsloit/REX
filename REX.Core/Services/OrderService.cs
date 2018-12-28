@@ -147,6 +147,7 @@ namespace REX.Core.Services
             {
                 res = dbContext.Orders
                     .Include(e=>e.ProductType)
+                    .Include(e=>e.Contact)
                     .Where(x => x.IsNew == true).ToList();
             }
 
