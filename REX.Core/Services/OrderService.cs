@@ -145,9 +145,10 @@ namespace REX.Core.Services
             var res = new List<Order>();
             using (var dbContext = new RexDbContext())
             {
+                dbContext.Configuration.LazyLoadingEnabled = false;
                 res = dbContext.Orders
                     .Include(e=>e.ProductType)
-                    .Include(e=>e.Contact)
+                    .Include(e=>e.Contact  )
                     .Where(x => x.IsNew == true).ToList();
             }
 

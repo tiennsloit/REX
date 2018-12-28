@@ -175,5 +175,11 @@ namespace REX.UnitTest
             var getAgainOrder = orderService.GetOrder(resultCreated.Id);
             Assert.AreEqual(null, getAgainOrder);
         }
+
+        [TestMethod]
+        public void TestGetTopOrders()
+        {
+            var result = orderService.GetOrders().Take(10).OrderByDescending(x => x.DateModified).ToList();
+        }
     }
 }
